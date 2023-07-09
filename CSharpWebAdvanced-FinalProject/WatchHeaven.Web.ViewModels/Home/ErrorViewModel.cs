@@ -1,4 +1,4 @@
-namespace WatchHeaven.Web.Models
+namespace WatchHeaven.Web.ViewModels.Home
 {
     public class ErrorViewModel
     {

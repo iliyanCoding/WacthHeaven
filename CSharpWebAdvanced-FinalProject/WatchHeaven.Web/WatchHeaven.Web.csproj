@@ -15,4 +15,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.13" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WatchHeaven.Common\WatchHeaven.Common.csproj" />
+    <ProjectReference Include="..\WatchHeaven.Data.Model\WatchHeaven.Data.Model.csproj" />
+    <ProjectReference Include="..\WatchHeaven.Data\WatchHeaven.Data.csproj" />
+    <ProjectReference Include="..\WatchHeaven.Web.ViewModels\WatchHeaven.Web.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>
