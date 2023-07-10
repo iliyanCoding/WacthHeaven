@@ -10,6 +10,7 @@ namespace WatchHeaven.Data.Model
 {
     public class Watch
     {
+
         [Key]
         public Guid Id { get; set; }
 
@@ -43,5 +44,6 @@ namespace WatchHeaven.Data.Model
         public Guid SellerId { get; set; }
 
         public Seller Seller { get; set; } = null!;
+
     }
 }

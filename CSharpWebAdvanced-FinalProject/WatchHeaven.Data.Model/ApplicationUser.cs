@@ -9,5 +9,11 @@ namespace WatchHeaven.Data.Model
 {
     public class ApplicationUser : IdentityUser<Guid>
     {
+        public ApplicationUser()
+        {
+            this.FavouriteWatches = new HashSet<Watch>();
+        }
+        public virtual ICollection<Watch> FavouriteWatches { get; set; }
+
     }
 }

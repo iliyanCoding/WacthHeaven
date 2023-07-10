@@ -40,5 +40,14 @@ namespace WatchHeaven.Common
             public const int YearOfManufactureMaxValue = 2023;
 
         }
+
+        public static class Seller
+        {
+            public const int PhoneNumberMinLength = 7;
+            public const int PhoneNumberMaxLength = 15;
+
+            public const int AddressMinLength = 5;
+            public const int AddressMaxLength = 150;
+        }
     }
 }

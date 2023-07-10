@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using System.Reflection.Emit;
 using WatchHeaven.Data.Model;
 
 namespace WatchHeaven.Web.Data
@@ -16,17 +18,21 @@ namespace WatchHeaven.Web.Data
 
         public DbSet<Condition> Conditions { get; set; } = null!;
 
-        public DbSet<FavouriteWatches> FavouritesWatches { get; set; } = null!;
-
         public DbSet<Seller> Sellers { get; set; } = null!;
 
         public DbSet<Watch> Watches { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<FavouriteWatches>()
+            .HasKey(f => new { f.UserId, f.WatchId });
+
+            Assembly configAssembly = Assembly.GetAssembly(typeof(WatchHeavenDbContext)) ??
+                                      Assembly.GetExecutingAssembly();
+
+            builder.ApplyConfigurationsFromAssembly(configAssembly);
+
             base.OnModelCreating(builder);
-
-
         }
     }
 }
