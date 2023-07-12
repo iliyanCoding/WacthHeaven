@@ -24,8 +24,6 @@ namespace WatchHeaven.Web.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<FavouriteWatches>()
-            .HasKey(f => new { f.UserId, f.WatchId });
 
             Assembly configAssembly = Assembly.GetAssembly(typeof(WatchHeavenDbContext)) ??
                                       Assembly.GetExecutingAssembly();
