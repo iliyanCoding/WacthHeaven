@@ -11,7 +11,7 @@ namespace WatchHeaven.Data.Model
     {
         public Guid UserId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
         public Guid WatchId { get; set; }
 

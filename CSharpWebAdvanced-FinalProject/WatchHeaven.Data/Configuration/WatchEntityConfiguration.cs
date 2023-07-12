@@ -30,6 +30,7 @@ namespace WatchHeaven.Data.Configuration
                 .WithMany(s => s.OwnedWatches)
                 .HasForeignKey(w => w.SellerId)
                 .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

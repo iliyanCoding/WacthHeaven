@@ -267,12 +267,7 @@ namespace WatchHeaven.Data.Migrations
                     b.Property<Guid>("WatchId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("UserId", "WatchId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("WatchId");
 
@@ -290,9 +285,6 @@ namespace WatchHeaven.Data.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<Guid>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -303,7 +295,7 @@ namespace WatchHeaven.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Sellers");
                 });
@@ -415,9 +407,9 @@ namespace WatchHeaven.Data.Migrations
 
             modelBuilder.Entity("WatchHeaven.Data.Model.FavouriteWatches", b =>
                 {
-                    b.HasOne("WatchHeaven.Data.Model.ApplicationUser", "ApplicationUser")
+                    b.HasOne("WatchHeaven.Data.Model.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -427,20 +419,20 @@ namespace WatchHeaven.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("User");
 
                     b.Navigation("Watch");
                 });
 
             modelBuilder.Entity("WatchHeaven.Data.Model.Seller", b =>
                 {
-                    b.HasOne("WatchHeaven.Data.Model.ApplicationUser", "ApplicationUser")
+                    b.HasOne("WatchHeaven.Data.Model.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WatchHeaven.Data.Model.Watch", b =>

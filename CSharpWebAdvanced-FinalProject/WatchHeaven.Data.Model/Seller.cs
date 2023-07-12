@@ -28,7 +28,7 @@ namespace WatchHeaven.Data.Model
 
         public Guid UserId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; } = null!;
+        public virtual ApplicationUser User { get; set; } = null!;
 
         public virtual ICollection<Watch> OwnedWatches { get; set; }
     }

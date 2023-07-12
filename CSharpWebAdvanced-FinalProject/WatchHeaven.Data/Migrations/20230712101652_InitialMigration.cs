@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WatchHeaven.Data.Migrations
 {
-    public partial class InitializeDb : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -187,15 +187,14 @@ namespace WatchHeaven.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sellers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sellers_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
+                        name: "FK_Sellers_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -245,24 +244,23 @@ namespace WatchHeaven.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FavouritesWatches",
+                name: "FavouriteWatches",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     WatchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FavouritesWatches", x => x.UserId);
+                    table.PrimaryKey("PK_FavouriteWatches", x => new { x.UserId, x.WatchId });
                     table.ForeignKey(
-                        name: "FK_FavouritesWatches_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
+                        name: "FK_FavouriteWatches_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FavouritesWatches_Watches_WatchId",
+                        name: "FK_FavouriteWatches_Watches_WatchId",
                         column: x => x.WatchId,
                         principalTable: "Watches",
                         principalColumn: "Id",
@@ -309,19 +307,14 @@ namespace WatchHeaven.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FavouritesWatches_ApplicationUserId",
-                table: "FavouritesWatches",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FavouritesWatches_WatchId",
-                table: "FavouritesWatches",
+                name: "IX_FavouriteWatches_WatchId",
+                table: "FavouriteWatches",
                 column: "WatchId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sellers_ApplicationUserId",
+                name: "IX_Sellers_UserId",
                 table: "Sellers",
-                column: "ApplicationUserId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Watches_ApplicationUserId",
@@ -362,7 +355,7 @@ namespace WatchHeaven.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "FavouritesWatches");
+                name: "FavouriteWatches");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

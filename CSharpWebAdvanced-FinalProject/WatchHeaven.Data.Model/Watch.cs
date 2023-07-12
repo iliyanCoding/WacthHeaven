@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,17 +31,19 @@ namespace WatchHeaven.Data.Model
         [MaxLength(ImageUrlMaxLength)]
         public string ImageUrl { get; set; } = null!;
 
-
         public decimal Price { get; set; }
 
+        [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
 
         public Category Category { get; set; } = null!;
 
+        [ForeignKey(nameof(Condition))]
         public int ConditionId { get; set; }
 
-        public Condition Condition { get; set; } = null!; 
+        public Condition Condition { get; set; } = null!;
 
+        [ForeignKey(nameof(Seller))]
         public Guid SellerId { get; set; }
 
         public Seller Seller { get; set; } = null!;
