@@ -28,7 +28,7 @@ namespace WatchHeaven.Common
             public const int ModelMaxLength = 50;
             public const int ModelMinLength = 3;
 
-            public const int DescriptionMaxLength = 500;
+            public const int DescriptionMaxLength = 1000;
             public const int DescriptionMinLength = 10;
 
             public const int ImageUrlMaxLength = 2048;

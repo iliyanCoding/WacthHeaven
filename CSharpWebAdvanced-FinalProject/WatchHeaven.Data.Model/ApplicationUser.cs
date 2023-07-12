@@ -11,6 +11,7 @@ namespace WatchHeaven.Data.Model
     {
         public ApplicationUser()
         {
+            this.Id = Guid.NewGuid();
             this.FavouriteWatches = new HashSet<Watch>();
         }
         public virtual ICollection<Watch> FavouriteWatches { get; set; }

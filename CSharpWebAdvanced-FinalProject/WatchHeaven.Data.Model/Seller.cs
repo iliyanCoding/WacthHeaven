@@ -12,6 +12,7 @@ namespace WatchHeaven.Data.Model
     {
         public Seller()
         {
+            this.Id = Guid.NewGuid();
             this.OwnedWatches = new HashSet<Watch>();
         }
 

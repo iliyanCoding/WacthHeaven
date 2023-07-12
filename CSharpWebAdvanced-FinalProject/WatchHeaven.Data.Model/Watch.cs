@@ -11,6 +11,11 @@ namespace WatchHeaven.Data.Model
 {
     public class Watch
     {
+        public Watch()
+        {
+            this.Id = Guid.NewGuid();
+        }
+
 
         [Key]
         public Guid Id { get; set; }
