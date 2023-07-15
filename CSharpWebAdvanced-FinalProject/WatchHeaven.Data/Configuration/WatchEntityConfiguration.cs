@@ -23,7 +23,8 @@ namespace WatchHeaven.Data.Configuration
             builder
                 .HasOne(w => w.Condition)
                 .WithMany(c => c.Watches)
-                .HasForeignKey(w => w.ConditionId);
+                .HasForeignKey(w => w.ConditionId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                   .HasOne(w => w.Seller)

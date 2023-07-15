@@ -21,9 +21,39 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li> 
+                        <li class="nav-item dropdown">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown">
+                                    Buy a Watch
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item text-dark" asp-controller="Watches" asp-action="AllWatches">All Watches</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-dark" asp-controller="Watches" asp-action="VintageWatches">Vintage Watches</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-dark" asp-controller="Watches" asp-action="ChronographWatches">Chronographs</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-dark" asp-controller="Watches" asp-action="DivingWatches">Diving Watches</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-dark" asp-controller="Watches" asp-action="PilotWatches">Pilot's Watches</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-dark" asp-controller="Watches" asp-action="MilitaryWatches">Military Watches</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        @if (this.User.Identity?.IsAuthenticated ?? false)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Favourites">Favourite</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
