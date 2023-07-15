@@ -1,19 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using WatchHeaven.Services.Data.Interfaces;
 using WatchHeaven.Web.ViewModels.Home;
 
 namespace WatchHeaven.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly IWatchService watchService; 
+
+        public HomeController(IWatchService watchService)
         {
-            
+            this.watchService = watchService; 
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IndexViewModel viewModel = await this.watchService.MostExpensiveWatchAsync();
+            return View(viewModel);
         }
 
 

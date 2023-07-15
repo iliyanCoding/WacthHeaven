@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WatchHeaven.Data.Model;
+using WatchHeaven.Services.Data;
+using WatchHeaven.Services.Data.Interfaces;
 using WatchHeaven.Web.Data;
 
 namespace WatchHeaven.Web
@@ -19,18 +21,21 @@ namespace WatchHeaven.Web
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = 
-                    builder.Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
-                options.Password.RequireLowercase =
-                     builder.Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
-                options.Password.RequireUppercase =
-                    builder.Configuration.GetValue<bool>("Identity:Password:RequireUppercase");
-                options.Password.RequireNonAlphanumeric = 
-                    builder.Configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
-                options.Password.RequiredLength =
-                    builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
+                options.SignIn.RequireConfirmedAccount
+                    = builder.Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
+                options.Password.RequireNonAlphanumeric
+                    = builder.Configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
+                options.Password.RequireLowercase
+                    = builder.Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
+                options.Password.RequireUppercase
+                    = builder.Configuration.GetValue<bool>("Identity:Password:RequireUppercase");
+                options.Password.RequiredLength
+                    = builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
+
             })
-                .AddEntityFrameworkStores<WatchHeavenDbContext>();
+               .AddEntityFrameworkStores<WatchHeavenDbContext>();
+            builder.Services 
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
