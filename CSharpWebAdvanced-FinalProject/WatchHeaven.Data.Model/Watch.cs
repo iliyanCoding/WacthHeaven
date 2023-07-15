@@ -38,6 +38,8 @@ namespace WatchHeaven.Data.Model
 
         public decimal Price { get; set; }
 
+        public DateTime AddedOn { get; set; }
+
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
 

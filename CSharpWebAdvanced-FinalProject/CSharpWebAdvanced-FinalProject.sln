@@ -3,19 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchHeaven.Web", "WatchHeaven.Web\WatchHeaven.Web.csproj", "{71C1F93A-CB73-45F4-B529-A5797DC03BA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchHeaven.Web", "WatchHeaven.Web\WatchHeaven.Web.csproj", "{71C1F93A-CB73-45F4-B529-A5797DC03BA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchHeaven.Common", "WatchHeaven.Common\WatchHeaven.Common.csproj", "{711FA428-D67D-4B40-82EB-37BC96F33086}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchHeaven.Common", "WatchHeaven.Common\WatchHeaven.Common.csproj", "{711FA428-D67D-4B40-82EB-37BC96F33086}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{5E9BA2A2-92BF-4F16-B544-2420BF64FE87}"
+	ProjectSection(SolutionItems) = preProject
+		WatchHeaven.Services.Data\WatchService.cs = WatchHeaven.Services.Data\WatchService.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{EF4990D2-B4C9-4CC3-8BF4-4C603B87BDCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchHeaven.Data", "WatchHeaven.Data\WatchHeaven.Data.csproj", "{8D1E8CEF-3BFC-4C07-B286-3C9E180A3A29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchHeaven.Data", "WatchHeaven.Data\WatchHeaven.Data.csproj", "{8D1E8CEF-3BFC-4C07-B286-3C9E180A3A29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchHeaven.Data.Model", "WatchHeaven.Data.Model\WatchHeaven.Data.Model.csproj", "{AF0F812D-40C4-4DDC-972B-02E83E9A3562}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchHeaven.Data.Model", "WatchHeaven.Data.Model\WatchHeaven.Data.Model.csproj", "{AF0F812D-40C4-4DDC-972B-02E83E9A3562}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchHeaven.Web.ViewModels", "WatchHeaven.Web.ViewModels\WatchHeaven.Web.ViewModels.csproj", "{0240267D-A6EF-474E-A1E8-E5C8D52AE56B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchHeaven.Web.ViewModels", "WatchHeaven.Web.ViewModels\WatchHeaven.Web.ViewModels.csproj", "{0240267D-A6EF-474E-A1E8-E5C8D52AE56B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{81F7F322-4DA2-4BA1-ABE1-E8FA7E127A0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchHeaven.Services.Data", "WatchHeaven.Services.Data\WatchHeaven.Services.Data.csproj", "{FC6118A7-9DDD-43D5-89A6-85F815178D7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +50,10 @@ Global
 		{0240267D-A6EF-474E-A1E8-E5C8D52AE56B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0240267D-A6EF-474E-A1E8-E5C8D52AE56B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0240267D-A6EF-474E-A1E8-E5C8D52AE56B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC6118A7-9DDD-43D5-89A6-85F815178D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC6118A7-9DDD-43D5-89A6-85F815178D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC6118A7-9DDD-43D5-89A6-85F815178D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC6118A7-9DDD-43D5-89A6-85F815178D7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +63,7 @@ Global
 		{8D1E8CEF-3BFC-4C07-B286-3C9E180A3A29} = {EF4990D2-B4C9-4CC3-8BF4-4C603B87BDCC}
 		{AF0F812D-40C4-4DDC-972B-02E83E9A3562} = {EF4990D2-B4C9-4CC3-8BF4-4C603B87BDCC}
 		{0240267D-A6EF-474E-A1E8-E5C8D52AE56B} = {5E9BA2A2-92BF-4F16-B544-2420BF64FE87}
+		{FC6118A7-9DDD-43D5-89A6-85F815178D7B} = {81F7F322-4DA2-4BA1-ABE1-E8FA7E127A0A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7E8571E-C1AB-4AF2-A1F5-B647D892E2DB}
