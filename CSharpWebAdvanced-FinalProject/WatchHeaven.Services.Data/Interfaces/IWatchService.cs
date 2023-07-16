@@ -9,6 +9,6 @@ namespace WatchHeaven.Services.Data.Interfaces
 {
     public interface IWatchService
     {
-        Task<IndexViewModel> MostExpensiveWatchAsync();
+        Task<IEnumerable<IndexViewModel>> MostExpensiveWatchesAsync();
     }
 }

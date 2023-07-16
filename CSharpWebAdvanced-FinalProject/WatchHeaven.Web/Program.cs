@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using WatchHeaven.Data.Model;
 using WatchHeaven.Services.Data;
 using WatchHeaven.Services.Data.Interfaces;
@@ -34,7 +35,7 @@ namespace WatchHeaven.Web
 
             })
                .AddEntityFrameworkStores<WatchHeavenDbContext>();
-            builder.Services 
+            builder.Services.AddApplicationServices(typeof(IWatchService)); 
 
             builder.Services.AddControllersWithViews();
 

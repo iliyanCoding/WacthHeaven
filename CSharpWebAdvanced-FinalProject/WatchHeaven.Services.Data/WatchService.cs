@@ -14,11 +14,12 @@ namespace WatchHeaven.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task<IndexViewModel> MostExpensiveWatchAsync()
+        public async Task<IEnumerable<IndexViewModel>> MostExpensiveWatchesAsync()
         {
-            IndexViewModel? mostExpensiveWatche = await this.dbContext
+            IEnumerable<IndexViewModel>? mostExpensiveWatches = await this.dbContext
                 .Watches
                 .OrderByDescending(w => w.Price)
+                .Take(4)
                 .Select(w => new IndexViewModel
                 {
                     Id = w.Id.ToString(),
@@ -26,9 +27,9 @@ namespace WatchHeaven.Services.Data
                     Model = w.Model,
                     ImageUrl = w.ImageUrl,
                 })
-                .FirstOrDefaultAsync();
+                .ToArrayAsync();
 
-            return mostExpensiveWatche;
+            return mostExpensiveWatches;
                 
         }
     }

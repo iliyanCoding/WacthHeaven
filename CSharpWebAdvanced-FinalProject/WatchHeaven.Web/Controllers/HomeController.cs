@@ -14,9 +14,10 @@ namespace WatchHeaven.Web.Controllers
             this.watchService = watchService; 
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            IndexViewModel viewModel = await this.watchService.MostExpensiveWatchAsync();
+            IEnumerable<IndexViewModel> viewModel = await this.watchService.MostExpensiveWatchesAsync();
             return View(viewModel);
         }
 
