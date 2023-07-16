@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WatchHeaven.Web.ViewModels.Category;
 
 namespace WatchHeaven.Services.Data.Interfaces
 {
-    internal interface ICategoryService
+    public interface ICategoryService
     {
+        Task<IEnumerable<WatchSelectCategoryFormModel>> GetAllCategoriesAsync();
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WatchHeaven.Web.ViewModels.Condition;
 
 namespace WatchHeaven.Services.Data.Interfaces
 {
-    internal interface IConditionService
+    public interface IConditionService
     {
+        Task<IEnumerable<WatchSelectConditionFormModel>> GetAllConditionsAsync();
     }
 }
