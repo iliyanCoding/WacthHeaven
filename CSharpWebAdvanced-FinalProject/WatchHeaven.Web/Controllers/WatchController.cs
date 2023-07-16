@@ -11,5 +11,11 @@ namespace WatchHeaven.Web.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddWatch()
+        {
+            return View();
+        }
     }
 }

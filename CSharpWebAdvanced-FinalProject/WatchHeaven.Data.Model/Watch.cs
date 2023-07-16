@@ -36,6 +36,7 @@ namespace WatchHeaven.Data.Model
         [MaxLength(ImageUrlMaxLength)]
         public string ImageUrl { get; set; } = null!;
 
+        [Required]
         public decimal Price { get; set; }
 
         public DateTime AddedOn { get; set; }
