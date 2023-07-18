@@ -19,6 +19,12 @@ namespace WatchHeaven.Services.Data
             this.dbContext = dbContext;
         }
 
+        public async Task<bool> ExistsByIdAsync(int conditionId)
+        {
+            bool result = await this.dbContext.Conditions.AnyAsync(c => c.Id == conditionId);
+            return result;
+        }
+
         public async Task<IEnumerable<WatchSelectConditionFormModel>> GetAllConditionsAsync()
         {
             IEnumerable<WatchSelectConditionFormModel> allConditions = await this.dbContext

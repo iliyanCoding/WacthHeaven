@@ -16,5 +16,7 @@ namespace WatchHeaven.Services.Data.Interfaces
         Task<bool> SellerExistsByAddressAsync(string address);
 
         Task CreateSellerAsync(string userId, BecomeSellerFormModel model);
+
+        Task<string?> GetSellerIdByUserIdAsync(string userId);
     }
 }
