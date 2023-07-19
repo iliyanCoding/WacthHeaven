@@ -6,6 +6,7 @@ using WatchHeaven.Data.Model;
 using WatchHeaven.Services.Data;
 using WatchHeaven.Services.Data.Interfaces;
 using WatchHeaven.Web.Data;
+using WatchHeaven.Web.Infrastructure.ModelBinders;
 
 namespace WatchHeaven.Web
 {
@@ -37,7 +38,11 @@ namespace WatchHeaven.Web
                .AddEntityFrameworkStores<WatchHeavenDbContext>();
             builder.Services.AddApplicationServices(typeof(IWatchService)); 
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                });
 
             var app = builder.Build();
 
