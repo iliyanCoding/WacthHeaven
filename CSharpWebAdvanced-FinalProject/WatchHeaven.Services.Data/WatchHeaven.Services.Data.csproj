@@ -10,6 +10,7 @@
     <ProjectReference Include="..\WatchHeaven.Common\WatchHeaven.Common.csproj" />
     <ProjectReference Include="..\WatchHeaven.Data.Model\WatchHeaven.Data.Model.csproj" />
     <ProjectReference Include="..\WatchHeaven.Data\WatchHeaven.Data.csproj" />
+    <ProjectReference Include="..\WatchHeaven.Services.Data.Models\WatchHeaven.Services.Data.Models.csproj" />
     <ProjectReference Include="..\WatchHeaven.Web.ViewModels\WatchHeaven.Web.ViewModels.csproj" />
   </ItemGroup>
 

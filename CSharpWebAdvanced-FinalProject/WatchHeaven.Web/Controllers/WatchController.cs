@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchHeaven.Services.Data.Interfaces;
+using WatchHeaven.Services.Data.Models.Watch;
 using WatchHeaven.Web.Infrastructure.Extensions;
 using WatchHeaven.Web.ViewModels.Watch;
 using static WatchHeaven.Common.NotificationMessageConstants;
@@ -24,10 +25,18 @@ namespace WatchHeaven.Web.Controllers
 
         }
 
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]AllWatchesQueryModel queryModel)
         {
-            return this.Ok();
+            AllWatchesFilteredAndPagedServiceModel serviceModel = await this.watchService.AllAsync(queryModel);
+
+            queryModel.Watches = serviceModel.Watches;
+            queryModel.TotalWatches = serviceModel.TotalWatchesCount;
+            queryModel.Categories = await this.categoryService.AllCategoriesNamesAsync();
+            queryModel.Conditions = await this.conditionService.AllConditionsNamesAsync();
+
+            return this.View(queryModel);
         }
 
         [HttpGet]

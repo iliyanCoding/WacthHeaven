@@ -20,6 +20,16 @@ namespace WatchHeaven.Services.Data
             this.dbContext = dbContext;
         }
 
+        public async Task<IEnumerable<string>> AllCategoriesNamesAsync()
+        {
+            IEnumerable<string> allNames = await this.dbContext
+                .Categories
+                .Select(c => c.Name)
+                .ToArrayAsync();
+
+            return allNames;
+        }
+
         public async Task<bool> ExistsByIdAsync(int categoryId)
         {
             bool result = await this.dbContext.Categories.AnyAsync(c => c.Id == categoryId);

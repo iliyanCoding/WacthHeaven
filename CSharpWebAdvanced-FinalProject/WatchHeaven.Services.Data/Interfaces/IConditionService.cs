@@ -7,5 +7,7 @@ namespace WatchHeaven.Services.Data.Interfaces
         Task<IEnumerable<WatchSelectConditionFormModel>> GetAllConditionsAsync();
 
         Task<bool> ExistsByIdAsync(int conditionId);
+
+        Task<IEnumerable<string>> AllConditionsNamesAsync();
     }
 }

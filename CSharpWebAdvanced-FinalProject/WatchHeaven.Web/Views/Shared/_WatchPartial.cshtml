@@ -1,0 +1,57 @@
+﻿@using WatchHeaven.Services.Data.Interfaces
+@using WatchHeaven.Web.Infrastructure.Extensions
+@model WatchAllViewModel
+
+@inject ISellerService SellerService
+@inject IWatchService WatchService
+@{
+    bool isUserSeller = await SellerService.SellerExistsByUserIdAsync(this.User.GetId()!);
+    //bool isAgentOwnerOfTheHouse = await AgentService.HasHouseWithIdAsync(this.User.GetId(), Model.Id);
+    //bool isHouseRentedByUser = await HouseService.IsRentedByUserWithIdAsync(Model.Id, this.User.GetId()!);
+}
+
+<style>
+    /* Custom CSS to ensure all cards have the same size */
+    .card-body {
+        height: 300px; /* Adjust this value as needed to set the desired fixed height */
+    }
+
+    .card-img-top {
+        object-fit: cover;
+        height: 400px; /* Adjust this value as needed to set the desired image height */
+    }
+</style>
+
+<div class="col-md-4">
+    <div class="card mb-3">
+        <img class="card-img-top" src="@Model.ImageUrl" alt="Watch Image">
+        <div class="card-body text-center">
+            <h4>@Model.Brand</h4>
+            <h6>Address: <b>@Model.Model</b></h6>
+            <h6>
+                Price:
+                <b>@($"{Model.Price:f2}") BGN</b>
+            </h6>
+            <br />
+            <a asp-controller="House" asp-action="Details" asp-route-id="@Model.Id"
+               class="btn btn-success">Details</a>
+
+            @if (this.User.Identity?.IsAuthenticated ?? false)
+            {
+
+                <a asp-controller="Watch" asp-action="Edit" asp-route-id="@Model.Id"
+                   class="btn btn-warning">Edit</a>
+                <a asp-controller="Watch" asp-action="Delete" asp-route-id="@Model.Id"
+                   class="btn btn-danger">Delete</a>
+
+                <p></p>
+
+                <form class="input-group-md" asp-controller="Watch"
+                  asp-action="Buy" asp-route-id="@Model.Id" method="post">
+                    <input class="btn btn-primary" type="submit" value="Buy" />
+                </form>
+
+            }
+        </div>
+    </div>
+</div>

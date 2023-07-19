@@ -12,5 +12,7 @@ namespace WatchHeaven.Services.Data.Interfaces
         Task<IEnumerable<WatchSelectCategoryFormModel>> GetAllCategoriesAsync();
 
         Task<bool> ExistsByIdAsync(int categoryId);
+
+        Task<IEnumerable<string>> AllCategoriesNamesAsync();
     }
 }
