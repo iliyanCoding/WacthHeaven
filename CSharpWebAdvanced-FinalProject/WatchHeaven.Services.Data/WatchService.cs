@@ -82,6 +82,24 @@ namespace WatchHeaven.Services.Data
             };
         }
 
+        public async Task<IEnumerable<WatchAllViewModel>> AllBySellerIdAsync(string sellerId)
+        {
+            IEnumerable<WatchAllViewModel> allSellerWatches = await this.dbContext
+                   .Watches
+                   .Where(w => w.SellerId.ToString() == sellerId)
+                   .Select(w => new WatchAllViewModel()
+                   {
+                       Id = w.Id.ToString(),
+                       Model = w.Model,
+                       Brand = w.Brand,
+                       ImageUrl= w.ImageUrl,
+                       Price= w.Price
+                   })
+                   .ToArrayAsync();
+
+            return allSellerWatches;
+        }
+
         public async Task CreateAsync(WatchFormViewModel model, string sellerId)
         {
             Watch watch = new Watch() 

@@ -16,5 +16,7 @@ namespace WatchHeaven.Services.Data.Interfaces
         Task CreateAsync(WatchFormViewModel formViewModel, string sellerId);
 
         Task<AllWatchesFilteredAndPagedServiceModel> AllAsync(AllWatchesQueryModel queryModel);
+
+        Task<IEnumerable<WatchAllViewModel>> AllBySellerIdAsync(string sellerId);
     }
 }

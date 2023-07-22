@@ -1,0 +1,21 @@
+﻿@model List<WatchAllViewModel>
+@{
+    ViewData["Title"] = "My watches";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+@if(!Model.Any())
+{
+    <h2 class="text-center">You don't have any watches!</h2>
+}
+else
+{
+    <div class="row">
+        @foreach (WatchAllViewModel watch in Model)
+        {
+            <partial name="_WatchPartial" model="watch"/>
+        }
+    </div>
+}

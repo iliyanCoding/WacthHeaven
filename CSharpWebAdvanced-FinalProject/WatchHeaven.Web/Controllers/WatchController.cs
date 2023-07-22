@@ -109,5 +109,23 @@ namespace WatchHeaven.Web.Controllers
 
             return this.RedirectToAction("All", "Watch");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Mine()
+        {
+            List<WatchAllViewModel> myWatches = new List<WatchAllViewModel>();
+
+            string userId = this.User.GetId()!;
+
+            bool isUserSeller = await this.sellerService.SellerExistsByUserIdAsync(userId);
+
+            if (isUserSeller)
+            {
+                string? sellerId = await this.sellerService.GetSellerIdByUserIdAsync(userId);
+                myWatches.AddRange(await this.watchService.AllBySellerIdAsync(sellerId!));
+            }
+
+            return View(myWatches);
+        }
     }
 }
