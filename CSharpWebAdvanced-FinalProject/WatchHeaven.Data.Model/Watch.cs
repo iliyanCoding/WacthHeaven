@@ -41,6 +41,8 @@ namespace WatchHeaven.Data.Model
 
         public DateTime AddedOn { get; set; }
 
+        public bool IsActive { get; set; }
+
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
 

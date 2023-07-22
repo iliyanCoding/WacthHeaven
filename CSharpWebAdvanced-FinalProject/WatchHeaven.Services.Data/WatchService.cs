@@ -59,8 +59,9 @@ namespace WatchHeaven.Services.Data
                 _ => watchesQuery.OrderByDescending(w => w.AddedOn)
             };
 
-            IEnumerable<WatchAllViewModel> allWatches = await watchesQuery.
-                Skip((queryModel.CurrentPage - 1) * queryModel.WatchesPerPage)
+            IEnumerable<WatchAllViewModel> allWatches = await watchesQuery
+                .Where(w => w.IsActive)
+                .Skip((queryModel.CurrentPage - 1) * queryModel.WatchesPerPage)
                 .Take(queryModel.WatchesPerPage)
                 .Select(w => new WatchAllViewModel
                 {
@@ -103,6 +104,7 @@ namespace WatchHeaven.Services.Data
         {
             IEnumerable<IndexViewModel>? mostExpensiveWatches = await this.dbContext
                 .Watches
+                .Where(w => w.IsActive)
                 .OrderByDescending(w => w.Price)
                 .Take(4)
                 .Select(w => new IndexViewModel

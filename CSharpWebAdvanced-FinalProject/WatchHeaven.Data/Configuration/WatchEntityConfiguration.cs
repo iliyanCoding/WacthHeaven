@@ -17,6 +17,9 @@ namespace WatchHeaven.Data.Configuration
             builder.Property(w => w.AddedOn)
                    .HasDefaultValueSql("GETDATE()");
 
+            builder.Property(w => w.IsActive)
+                   .HasDefaultValue(true);
+
             builder
                 .HasOne(w => w.Category)
                 .WithMany(c => c.Watches)
