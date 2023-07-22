@@ -52,8 +52,8 @@ namespace WatchHeaven.Services.Data
 
             watchesQuery = queryModel.WatchSorting switch
             {
-                WatchSorting.Newest => watchesQuery.OrderBy(w => w.AddedOn),
-                WatchSorting.Oldest => watchesQuery.OrderByDescending(w => w.AddedOn),
+                WatchSorting.Newest => watchesQuery.OrderByDescending(w => w.AddedOn),
+                WatchSorting.Oldest => watchesQuery.OrderBy(w => w.AddedOn),
                 WatchSorting.PriceAscending => watchesQuery.OrderBy(w => w.Price),
                 WatchSorting.PriceDescending => watchesQuery.OrderByDescending(w => w.Price),
                 _ => watchesQuery.OrderByDescending(w => w.AddedOn)

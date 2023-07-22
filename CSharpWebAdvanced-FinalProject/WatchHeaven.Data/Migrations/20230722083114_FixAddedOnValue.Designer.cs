@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WatchHeaven.Web.Data;
 
@@ -11,9 +12,10 @@ using WatchHeaven.Web.Data;
 namespace WatchHeaven.Data.Migrations
 {
     [DbContext(typeof(WatchHeavenDbContext))]
-    partial class WatchHeavenDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230722083114_FixAddedOnValue")]
+    partial class FixAddedOnValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

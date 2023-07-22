@@ -14,7 +14,8 @@ namespace WatchHeaven.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Watch> builder)
         {
-            builder.Property(w => w.AddedOn).HasDefaultValue(DateTime.UtcNow);
+            builder.Property(w => w.AddedOn)
+                   .HasDefaultValueSql("GETDATE()");
 
             builder
                 .HasOne(w => w.Category)
