@@ -1,0 +1,13 @@
+﻿@model WatchFormViewModel
+@{
+    ViewData["Title"] = "Edit Watch Info";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_WatchFormPartial" model="@Model" />
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

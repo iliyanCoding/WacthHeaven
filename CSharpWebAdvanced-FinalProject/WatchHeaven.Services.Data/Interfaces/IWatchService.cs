@@ -19,6 +19,15 @@ namespace WatchHeaven.Services.Data.Interfaces
 
         Task<IEnumerable<WatchAllViewModel>> AllBySellerIdAsync(string sellerId);
 
-        Task<WatchDetailsViewModel?> GetDetailsByIdAsync(string watchId);
+        Task<WatchDetailsViewModel> GetDetailsByIdAsync(string watchId);
+
+        Task<bool> ExistsByIdAsync(string watchId);
+
+        Task<WatchFormViewModel> GetWatchForEditByIdAsync(string watchId);
+
+        Task<bool> IsSellerWithIdOwnerofWatchWithIdAsync(string sellerId, string watchId);
+
+        Task EditWatchByIdAndFormModel(string watchId, WatchFormViewModel formModel);
+
     }
 }

@@ -120,7 +120,35 @@ namespace WatchHeaven.Services.Data
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task<WatchDetailsViewModel?> GetDetailsByIdAsync(string watchId)
+        public async Task EditWatchByIdAndFormModel(string watchId, WatchFormViewModel formModel)
+        {
+            Watch watch = await this.dbContext
+                .Watches
+                .Where(w => w.IsActive)
+                .FirstAsync(w => w.Id.ToString() == watchId);
+
+            watch.Brand = formModel.Brand;
+            watch.Model = formModel.Model;
+            watch.Description = formModel.Description;
+            watch.ImageUrl = formModel.ImageUrl;
+            watch.Price = formModel.Price;
+            watch.CategoryId = formModel.CategoryId;
+            watch.ConditionId = formModel.ConditionId;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> ExistsByIdAsync(string watchId)
+        {
+            bool result = await this.dbContext
+                .Watches
+                .Where(w => w.IsActive)
+                .AnyAsync(w => w.Id.ToString() == watchId);
+
+            return result;
+        }
+
+        public async Task<WatchDetailsViewModel> GetDetailsByIdAsync(string watchId)
         {
             Watch? watch = await this.dbContext
                 .Watches
@@ -129,12 +157,7 @@ namespace WatchHeaven.Services.Data
                 .Include(w => w.Seller)
                 .ThenInclude(s => s.User)
                 .Where(w => w.IsActive)
-                .FirstOrDefaultAsync(w => w.Id.ToString() == watchId);
-
-            if (watch == null)
-            {
-                return null;
-            }
+                .FirstAsync(w => w.Id.ToString() == watchId);
 
             return new WatchDetailsViewModel()
             {
@@ -152,6 +175,37 @@ namespace WatchHeaven.Services.Data
                     PhoneNumber = watch.Seller.PhoneNumber
                 }
             };
+        }
+
+        public async Task<WatchFormViewModel> GetWatchForEditByIdAsync(string watchId)
+        {
+            Watch? watch = await this.dbContext
+                .Watches
+                .Include(w => w.Category)
+                .Include(w => w.Condition)
+                .Where(w => w.IsActive)
+                .FirstAsync(w => w.Id.ToString() == watchId);
+
+            return new WatchFormViewModel()
+            {
+                Model = watch.Model,
+                Brand = watch.Brand,
+                ImageUrl = watch.ImageUrl,
+                Price = watch.Price,
+                Description = watch.Description,
+                CategoryId = watch.CategoryId,
+                ConditionId = watch.ConditionId,
+            };
+        }
+
+        public async Task<bool> IsSellerWithIdOwnerofWatchWithIdAsync(string sellerId, string watchId)
+        {
+            Watch watch = await this.dbContext
+                .Watches
+                .Where(w => w.IsActive)
+                .FirstAsync(w => w.Id.ToString() == watchId);
+
+            return watch.SellerId.ToString() == sellerId;
         }
 
         public async Task<IEnumerable<IndexViewModel>> MostExpensiveWatchesAsync()
