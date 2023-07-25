@@ -102,7 +102,7 @@ namespace WatchHeaven.Services.Data
             return allSellerWatches;
         }
 
-        public async Task CreateAsync(WatchFormViewModel model, string sellerId)
+        public async Task<string> CreateAsync(WatchFormViewModel model, string sellerId)
         {
             Watch watch = new Watch() 
             {
@@ -118,6 +118,8 @@ namespace WatchHeaven.Services.Data
 
             await this.dbContext.Watches.AddAsync(watch);
             await this.dbContext.SaveChangesAsync();
+
+            return watch.Id.ToString();
         }
 
         public async Task EditWatchByIdAndFormModel(string watchId, WatchFormViewModel formModel)

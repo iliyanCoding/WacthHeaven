@@ -13,7 +13,7 @@ namespace WatchHeaven.Services.Data.Interfaces
     {
         Task<IEnumerable<IndexViewModel>> MostExpensiveWatchesAsync();
 
-        Task CreateAsync(WatchFormViewModel formViewModel, string sellerId);
+        Task<string> CreateAsync(WatchFormViewModel formViewModel, string sellerId);
 
         Task<AllWatchesFilteredAndPagedServiceModel> AllAsync(AllWatchesQueryModel queryModel);
 

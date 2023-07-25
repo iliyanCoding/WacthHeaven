@@ -104,7 +104,10 @@ namespace WatchHeaven.Web.Controllers
             {
                 string? sellerId = await this.sellerService.GetSellerIdByUserIdAsync(this.User.GetId()!);
 
-                await this.watchService.CreateAsync(formModel, sellerId!);
+                string watchId = await this.watchService.CreateAsync(formModel, sellerId!);
+
+                this.TempData[SuccessMessage] = "The watch was added successfully";
+                return this.RedirectToAction("Details", "Watch", new { id = watchId });
             }
             catch (Exception)
             {
@@ -115,7 +118,6 @@ namespace WatchHeaven.Web.Controllers
                 return View(formModel);
             }
 
-            return this.RedirectToAction("Details", "Watch");
         }
 
         [HttpGet]
@@ -235,6 +237,7 @@ namespace WatchHeaven.Web.Controllers
                 return View(formModel);
             }
 
+            this.TempData[SuccessMessage] = "The watch was edited successfully";
             return this.RedirectToAction("Details", "Watch", new { id });
         }
 
