@@ -122,7 +122,7 @@ namespace WatchHeaven.Services.Data
             return watch.Id.ToString();
         }
 
-        public async Task EditWatchByIdAndFormModel(string watchId, WatchFormViewModel formModel)
+        public async Task EditWatchByIdAndFormModelAsync(string watchId, WatchFormViewModel formModel)
         {
             Watch watch = await this.dbContext
                 .Watches
@@ -176,6 +176,21 @@ namespace WatchHeaven.Services.Data
                     Email = watch.Seller.User.Email,
                     PhoneNumber = watch.Seller.PhoneNumber
                 }
+            };
+        }
+
+        public async Task<WatchDeleteDetailsViewModel> GetWatchForDeleteByIdAsync(string watchId)
+        {
+            Watch watch = await this.dbContext
+                .Watches
+                .Where(w => w.IsActive)
+                .FirstAsync(w => w.Id.ToString() == watchId);
+
+            return new WatchDeleteDetailsViewModel()
+            {
+                Brand = watch.Brand,
+                Model = watch.Model,
+                ImageUrl = watch.ImageUrl,
             };
         }
 

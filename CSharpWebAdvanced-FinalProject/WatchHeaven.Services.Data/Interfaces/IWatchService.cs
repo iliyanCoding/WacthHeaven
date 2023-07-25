@@ -27,7 +27,9 @@ namespace WatchHeaven.Services.Data.Interfaces
 
         Task<bool> IsSellerWithIdOwnerofWatchWithIdAsync(string sellerId, string watchId);
 
-        Task EditWatchByIdAndFormModel(string watchId, WatchFormViewModel formModel);
+        Task EditWatchByIdAndFormModelAsync(string watchId, WatchFormViewModel formModel);
+
+        Task<WatchDeleteDetailsViewModel> GetWatchForDeleteByIdAsync(string watchId);
 
     }
 }
