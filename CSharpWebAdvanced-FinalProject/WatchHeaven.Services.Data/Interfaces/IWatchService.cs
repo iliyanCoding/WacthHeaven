@@ -18,5 +18,7 @@ namespace WatchHeaven.Services.Data.Interfaces
         Task<AllWatchesFilteredAndPagedServiceModel> AllAsync(AllWatchesQueryModel queryModel);
 
         Task<IEnumerable<WatchAllViewModel>> AllBySellerIdAsync(string sellerId);
+
+        Task<WatchDetailsViewModel?> GetDetailsByIdAsync(string watchId);
     }
 }

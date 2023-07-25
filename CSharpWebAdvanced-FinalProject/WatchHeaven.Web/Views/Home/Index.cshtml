@@ -18,7 +18,8 @@
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title flex-grow-1">@watch.Brand</h5>
                         <p class="card-text">@watch.Model</p>
-                        <a href="#" class="btn btn-primary mt-auto">See more</a>
+                        <a asp-controller="Watch" asp-action="Details" asp-route-id="@watch.Id"
+                           class="btn btn-primary mt-auto">See more</a>
                     </div>
                 </div>
             </div>

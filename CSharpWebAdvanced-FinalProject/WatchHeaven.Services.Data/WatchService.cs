@@ -4,6 +4,7 @@ using WatchHeaven.Services.Data.Interfaces;
 using WatchHeaven.Services.Data.Models.Watch;
 using WatchHeaven.Web.Data;
 using WatchHeaven.Web.ViewModels.Home;
+using WatchHeaven.Web.ViewModels.Seller;
 using WatchHeaven.Web.ViewModels.Watch;
 using WatchHeaven.Web.ViewModels.Watch.Enums;
 
@@ -86,7 +87,8 @@ namespace WatchHeaven.Services.Data
         {
             IEnumerable<WatchAllViewModel> allSellerWatches = await this.dbContext
                    .Watches
-                   .Where(w => w.SellerId.ToString() == sellerId)
+                   .Where(w => w.SellerId.ToString() == sellerId && 
+                          w.IsActive)
                    .Select(w => new WatchAllViewModel()
                    {
                        Id = w.Id.ToString(),
@@ -116,6 +118,40 @@ namespace WatchHeaven.Services.Data
 
             await this.dbContext.Watches.AddAsync(watch);
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<WatchDetailsViewModel?> GetDetailsByIdAsync(string watchId)
+        {
+            Watch? watch = await this.dbContext
+                .Watches
+                .Include(w => w.Category)
+                .Include(w => w.Condition)
+                .Include(w => w.Seller)
+                .ThenInclude(s => s.User)
+                .Where(w => w.IsActive)
+                .FirstOrDefaultAsync(w => w.Id.ToString() == watchId);
+
+            if (watch == null)
+            {
+                return null;
+            }
+
+            return new WatchDetailsViewModel()
+            {
+                Id = watch.Id.ToString(),
+                Model = watch.Model,
+                Brand = watch.Brand,
+                ImageUrl= watch.ImageUrl,
+                Price= watch.Price,
+                Description = watch.Description,
+                Category = watch.Category.Name,
+                Condition = watch.Condition.Name,
+                Seller = new SellerInfoOnWatchViewModel()
+                {
+                    Email = watch.Seller.User.Email,
+                    PhoneNumber = watch.Seller.PhoneNumber
+                }
+            };
         }
 
         public async Task<IEnumerable<IndexViewModel>> MostExpensiveWatchesAsync()

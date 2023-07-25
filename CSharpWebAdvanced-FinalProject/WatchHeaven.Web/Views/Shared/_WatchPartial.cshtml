@@ -33,7 +33,7 @@
                 <b>@($"{Model.Price:f2}") BGN</b>
             </h6>
             <br />
-            <a asp-controller="House" asp-action="Details" asp-route-id="@Model.Id"
+            <a asp-controller="Watch" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-success">Details</a>
 
             @if (this.User.Identity?.IsAuthenticated ?? false)

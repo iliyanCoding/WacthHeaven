@@ -111,6 +111,22 @@ namespace WatchHeaven.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(string id)
+        {
+            WatchDetailsViewModel? viewModel = await this.watchService
+                .GetDetailsByIdAsync(id);
+
+            if (viewModel == null)
+            {
+                this.TempData[ErrorMessage] = "Watch with this id does not exist!";
+                return RedirectToAction("All", "Watch");
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Mine()
         {
             List<WatchAllViewModel> myWatches = new List<WatchAllViewModel>();
