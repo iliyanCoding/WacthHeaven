@@ -31,5 +31,7 @@ namespace WatchHeaven.Services.Data.Interfaces
 
         Task<WatchDeleteDetailsViewModel> GetWatchForDeleteByIdAsync(string watchId);
 
+        Task DeleteWatchByIdAsync(string watchId);
+
     }
 }

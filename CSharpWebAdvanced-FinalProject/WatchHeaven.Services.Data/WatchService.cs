@@ -122,6 +122,18 @@ namespace WatchHeaven.Services.Data
             return watch.Id.ToString();
         }
 
+        public async Task DeleteWatchByIdAsync(string watchId)
+        {
+            Watch watch = await this.dbContext
+                .Watches
+                .Where(w => w.IsActive)
+                .FirstAsync(w => w.Id.ToString() == watchId);
+
+            watch.IsActive = false;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task EditWatchByIdAndFormModelAsync(string watchId, WatchFormViewModel formModel)
         {
             Watch watch = await this.dbContext

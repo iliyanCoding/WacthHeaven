@@ -282,6 +282,49 @@ namespace WatchHeaven.Web.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, WatchDeleteDetailsViewModel viewModel)
+        {
+            bool exists = await this.watchService.ExistsByIdAsync(id);
+            if (!exists)
+            {
+                this.TempData[ErrorMessage] = "Watch with this id does not exist!";
+                return RedirectToAction("All", "Watch");
+            }
+
+            bool isUserSeller = await this.sellerService.SellerExistsByUserIdAsync(this.User.GetId()!);
+
+            if (!isUserSeller)
+            {
+                this.TempData[ErrorMessage] = "You must be a seller in order to edit the watch information!";
+                return RedirectToAction("BecomeSeller", "Seller");
+            }
+
+            string? sellerId = await this.sellerService.GetSellerIdByUserIdAsync(this.User.GetId());
+
+            bool isSellerOwner = await this.watchService.IsSellerWithIdOwnerofWatchWithIdAsync(sellerId!, id);
+
+            if (!isSellerOwner)
+            {
+                this.TempData[ErrorMessage] = "You must be the seller of this watch in order to edit the watch information";
+
+                return RedirectToAction("Mine", "Watch");
+            }
+
+            try
+            {
+                await this.watchService.DeleteWatchByIdAsync(id);
+
+                this.TempData[WarningMessage] = "The watch was deleted successfully!";
+                return RedirectToAction("Mine", "Watch");
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+
+        }
+
         [HttpGet]
         public async Task<IActionResult> Mine()
         {
