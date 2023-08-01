@@ -42,6 +42,22 @@
     </div>
 
 </div>
+
+<div class="mb-5"></div>
+
+<div class="row">
+    <div class="col-12 text-center">
+        <btn class="btn btn-primary" id="statisticsBtn">Show Statistics</btn>
+    </div>
+</div>
+
+<div class="mt-4 p-5 bg-dark d-none" id="statisticsBox">
+    <div class="row">
+        <h2 class="col-md-6 text-center text-light" id="totalWatches"></h2>
+        <h2 class="col-md-6 text-center text-light" id="totalUsers"></h2>
+    </div>
+</div>
+
 <div class="card mt-5 container-fluid" style="max-width: 800px;">
     <img src="https://assets.aboutamazon.com/dims4/default/46050cb/2147483647/strip/true/crop/1919x1080+1+0/resize/1320x743!/format/webp/quality/90/?url=https%3A%2F%2Famazon-blogs-brightspot.s3.amazonaws.com%2Fd5%2F8e%2F3afa1cef496ea40cbdcee54d28b5%2Fprivacyoption-3.jpg" style="max-width: 800px; height: auto;" class="card-img-top" alt="Shop Logo">
     <div class="card-body">
@@ -60,4 +76,28 @@
         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
 </div>
+
+
+
+@section Scripts{
+    <script>
+        $('#statisticsBtn').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if ($('#statisticsBox').hasClass('d-none')){
+                $.get('https://localhost:7076/api/statistics', function (data) {
+                    $('#totalWatches').text(data.totalWatches + " Watches");
+                    $('#totalUsers').text(data.totalUsers + " Users");
+                    $('#statisticsBox').removeClass('d-none');
+                    $('#statisticsBtn').text('Hide Statistics');
+                });
+            }
+            else{
+                $('#statisticsBox').addClass('d-none');
+                $('#statisticsBtn').text('Show Statistics')
+            }
+        });
+    </script>
+}
 

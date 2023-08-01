@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WatchHeaven.Services.Data.Models.Statistics;
 using WatchHeaven.Services.Data.Models.Watch;
 using WatchHeaven.Web.ViewModels.Home;
 using WatchHeaven.Web.ViewModels.Watch;
@@ -32,6 +33,8 @@ namespace WatchHeaven.Services.Data.Interfaces
         Task<WatchDeleteDetailsViewModel> GetWatchForDeleteByIdAsync(string watchId);
 
         Task DeleteWatchByIdAsync(string watchId);
+
+        Task<StatisticsServiceModel> GetStatisticsAsync();
 
     }
 }

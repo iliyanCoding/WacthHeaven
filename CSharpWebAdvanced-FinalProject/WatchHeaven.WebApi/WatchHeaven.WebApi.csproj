@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>bdb528bc-9445-4544-9af8-c30bd7dfd7c7</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WatchHeaven.Common\WatchHeaven.Common.csproj" />
+    <ProjectReference Include="..\WatchHeaven.Services.Data.Models\WatchHeaven.Services.Data.Models.csproj" />
+    <ProjectReference Include="..\WatchHeaven.Services.Data\WatchHeaven.Services.Data.csproj" />
+    <ProjectReference Include="..\WatchHeaven.Web.Infrastructure\WatchHeaven.Web.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

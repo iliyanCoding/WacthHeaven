@@ -1,5 +1,19 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Error 404 - Page Not Found";
 }
+
+<title>@ViewData["Title"]</title>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 mt-5">
+            <h1 class="text-center">Error 404</h1>
+            <p class="text-center">Page Not Found</p>
+            <div class="text-center">
+                <img src="https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-1932.jpg?w=2000" alt="Error 404" class="img-fluid" style="max-width: 300px;" />
+            </div>
+            <p class="text-center">The requested page could not be found.</p>
+            <div class="text-left h4">Go back to the <a asp-controller="Home" asp-action="Index">Home</a> page</div>
+        </div>
+    </div>
+</div>

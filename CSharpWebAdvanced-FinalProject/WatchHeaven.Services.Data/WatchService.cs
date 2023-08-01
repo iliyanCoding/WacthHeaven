@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WatchHeaven.Data.Model;
 using WatchHeaven.Services.Data.Interfaces;
+using WatchHeaven.Services.Data.Models.Statistics;
 using WatchHeaven.Services.Data.Models.Watch;
 using WatchHeaven.Web.Data;
 using WatchHeaven.Web.ViewModels.Home;
@@ -188,6 +189,15 @@ namespace WatchHeaven.Services.Data
                     Email = watch.Seller.User.Email,
                     PhoneNumber = watch.Seller.PhoneNumber
                 }
+            };
+        }
+
+        public async Task<StatisticsServiceModel> GetStatisticsAsync()
+        {
+            return new StatisticsServiceModel()
+            {
+                TotalWatches = await this.dbContext.Watches.CountAsync(),
+                TotalUsers = await this.dbContext.Users.CountAsync(),
             };
         }
 
