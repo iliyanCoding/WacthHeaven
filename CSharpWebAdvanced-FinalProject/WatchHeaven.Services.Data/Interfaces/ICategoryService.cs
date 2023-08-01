@@ -14,5 +14,7 @@ namespace WatchHeaven.Services.Data.Interfaces
         Task<bool> ExistsByIdAsync(int categoryId);
 
         Task<IEnumerable<string>> AllCategoriesNamesAsync();
+
+        Task<IEnumerable<AllCategoriesViewModel>> AllCategoriesForListAsync();
     }
 }

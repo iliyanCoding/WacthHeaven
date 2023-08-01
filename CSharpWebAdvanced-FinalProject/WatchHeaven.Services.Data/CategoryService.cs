@@ -20,6 +20,21 @@ namespace WatchHeaven.Services.Data
             this.dbContext = dbContext;
         }
 
+        public async Task<IEnumerable<AllCategoriesViewModel>> AllCategoriesForListAsync()
+        {
+            IEnumerable<AllCategoriesViewModel> allCategories = await this.dbContext
+                .Categories
+                .AsNoTracking()
+                .Select (c => new AllCategoriesViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                })
+                .ToArrayAsync();
+
+            return allCategories;
+        }
+
         public async Task<IEnumerable<string>> AllCategoriesNamesAsync()
         {
             IEnumerable<string> allNames = await this.dbContext

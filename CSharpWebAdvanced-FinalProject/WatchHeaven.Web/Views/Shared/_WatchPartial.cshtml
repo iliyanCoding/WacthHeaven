@@ -3,11 +3,9 @@
 @model WatchAllViewModel
 
 @inject ISellerService SellerService
-@inject IWatchService WatchService
 @{
-    bool isUserSeller = await SellerService.SellerExistsByUserIdAsync(this.User.GetId()!);
-    //bool isAgentOwnerOfTheHouse = await AgentService.HasHouseWithIdAsync(this.User.GetId(), Model.Id);
-    //bool isHouseRentedByUser = await HouseService.IsRentedByUserWithIdAsync(Model.Id, this.User.GetId()!);
+    bool isUserSeller = await SellerService.SellerExistsByUserIdAsync(this.User.GetId());
+    bool isSellerOwnerOfTheWatch = await SellerService.HasWatchWithIdAsync(this.User.GetId(), Model.Id);
 }
 
 <style>
@@ -38,19 +36,22 @@
 
             @if (this.User.Identity?.IsAuthenticated ?? false)
             {
+                @if (isUserSeller && isSellerOwnerOfTheWatch)
+                {
+                    <a asp-controller="Watch" asp-action="Edit" asp-route-id="@Model.Id"
+                       class="btn btn-warning">Edit</a>
+                    <a asp-controller="Watch" asp-action="Delete" asp-route-id="@Model.Id"
+                       class="btn btn-danger">Delete</a>
 
-                <a asp-controller="Watch" asp-action="Edit" asp-route-id="@Model.Id"
-                   class="btn btn-warning">Edit</a>
-                <a asp-controller="Watch" asp-action="Delete" asp-route-id="@Model.Id"
-                   class="btn btn-danger">Delete</a>
-
-                <p></p>
-
-                <form class="input-group-md" asp-controller="Watch"
+                    <p></p>
+                }
+                else
+                {
+                    <form class="input-group-md p-2" asp-controller="Watch"
                   asp-action="Buy" asp-route-id="@Model.Id" method="post">
-                    <input class="btn btn-primary" type="submit" value="Buy" />
-                </form>
-
+                        <input class="btn btn-primary" type="submit" value="Buy" />
+                    </form>
+                }
             }
         </div>
     </div>
