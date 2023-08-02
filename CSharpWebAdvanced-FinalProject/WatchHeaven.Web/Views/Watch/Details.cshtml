@@ -1,11 +1,6 @@
 ﻿@using WatchHeaven.Services.Data.Interfaces
 @using WatchHeaven.Web.Infrastructure.Extensions
 @model WatchDetailsViewModel
-@inject ISellerService SellerService
-@{
-    bool isUserSeller = await SellerService.SellerExistsByUserIdAsync(this.User.GetId());
-    bool isSellerOwnerOfTheWatch = await SellerService.HasWatchWithIdAsync(this.User.GetId(), Model.Id);
-}
 
 @{
     ViewBag.Title = "Watch Details";
@@ -31,25 +26,19 @@
             <p>Category: <b>@Model.Category</b></p>
             <p>Condition: <b>@Model.Condition</b></p>
             <div class="form-inline">
-                @if (this.User.Identity?.IsAuthenticated ?? false)
+                @if (User.Identity?.IsAuthenticated ?? false)
                 {
-                    @if (isUserSeller && isSellerOwnerOfTheWatch)
-                    {
-                        <a asp-controller="Watch" asp-action="Edit" asp-route-id="@Model.Id"
-                           class="btn btn-warning">Edit</a>
-                        <a asp-controller="Watch" asp-action="Delete" asp-route-id="@Model.Id"
-                           class="btn btn-danger">Delete</a>
-
-                        <p></p>
-                    }
-                    else
-                    {
-                        <form class="input-group-md p-2" asp-controller="Watch"
-                      asp-action="Buy" asp-route-id="@Model.Id" method="post">
-                            <input class="btn btn-primary" type="submit" value="Buy" />
-                        </form>
-                    }
+                    <a class="btn btn-warning" asp-controller="Watch" asp-action="Edit"
+                   asp-route-id="@Model.Id">Edit</a>
+                    <a class="ml-2 btn btn-danger" asp-controller="Watch" asp-action="Delete"
+                   asp-route-id="@Model.Id">Delete</a>
                 }
+
+
+                <form class="ml-2" asp-controller="Watch"
+                      asp-action="Buy" asp-route-id="@Model.Id" method="post">
+                    <input class="btn btn-primary" type="submit" value="Buy" />
+                </form>
             </div>
             <p></p>
             <div class="card" style="width: 18rem;">
