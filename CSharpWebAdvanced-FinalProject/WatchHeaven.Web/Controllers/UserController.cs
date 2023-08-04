@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WatchHeaven.Data.Model;
 using WatchHeaven.Web.ViewModels.User;
+using static WatchHeaven.Common.NotificationMessageConstants;
 
 namespace WatchHeaven.Web.Controllers
 {
@@ -58,6 +60,39 @@ namespace WatchHeaven.Web.Controllers
             await this.signInManager.SignInAsync(user, false);
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Login(string? returnUrl = null)
+        {
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            LoginFormViewModel viewModel = new LoginFormViewModel() 
+            { 
+                ReturnUrl = returnUrl,
+            }; 
+            return View(viewModel);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginFormViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var result = 
+                await this.signInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, viewModel.RememberMe, false);
+        
+            if (!result.Succeeded)
+            {
+                this.TempData[ErrorMessage] = "Unexpected error occured. Please try again later or contact administrator.";
+                return View(viewModel);
+            }
+
+            return Redirect(viewModel.ReturnUrl ?? "/Home/Index");
         }
     }
 }

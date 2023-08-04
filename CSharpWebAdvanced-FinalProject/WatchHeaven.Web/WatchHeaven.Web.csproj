@@ -33,4 +33,8 @@
     <ProjectReference Include="..\WatchHeaven.Web.ViewModels\WatchHeaven.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Pages\Account\" />
+  </ItemGroup>
+
 </Project>

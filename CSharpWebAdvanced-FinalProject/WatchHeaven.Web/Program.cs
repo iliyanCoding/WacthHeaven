@@ -37,7 +37,13 @@ namespace WatchHeaven.Web
 
             })
                .AddEntityFrameworkStores<WatchHeavenDbContext>();
-            builder.Services.AddApplicationServices(typeof(IWatchService)); 
+
+            builder.Services.AddApplicationServices(typeof(IWatchService));
+
+            builder.Services.ConfigureApplicationCookie(cfg =>
+            {
+                cfg.LoginPath = "/User/Login";
+            });
 
             builder.Services.AddControllersWithViews()
                 .AddMvcOptions(options =>

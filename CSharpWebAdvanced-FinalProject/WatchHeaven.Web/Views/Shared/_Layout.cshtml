@@ -58,9 +58,6 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Favourites">Favourite</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Watch" asp-action="AddWatch">Add a Watch For Sale</a>
-                            </li>
                         }
                         @if (this.User.Identity?.IsAuthenticated ?? false)
                         {
@@ -68,6 +65,9 @@
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Watch" asp-action="Mine">My Watches</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Watch" asp-action="AddWatch">Add a Watch For Sale</a>
                                 </li>
                             }
                         }
