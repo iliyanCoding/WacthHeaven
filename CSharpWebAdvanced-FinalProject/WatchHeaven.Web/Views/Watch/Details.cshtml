@@ -28,13 +28,14 @@
             <div class="form-inline">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
-                    <a class="btn btn-warning" asp-controller="Watch" asp-action="Edit"
+                    @if (this.User.IsAdmin())
+                    {
+                        <a class="btn btn-warning" asp-controller="Watch" asp-action="Edit"
                    asp-route-id="@Model.Id">Edit</a>
-                    <a class="ml-2 btn btn-danger" asp-controller="Watch" asp-action="Delete"
+                        <a class="ml-2 btn btn-danger" asp-controller="Watch" asp-action="Delete"
                    asp-route-id="@Model.Id">Delete</a>
+                    }
                 }
-
-
                 <form class="ml-2" asp-controller="Watch"
                       asp-action="Buy" asp-route-id="@Model.Id" method="post">
                     <input class="btn btn-primary" type="submit" value="Buy" />

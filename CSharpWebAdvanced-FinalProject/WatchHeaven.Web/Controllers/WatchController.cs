@@ -163,7 +163,7 @@ namespace WatchHeaven.Web.Controllers
 
             bool isUserSeller = await this.sellerService.SellerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserSeller)
+            if (!isUserSeller && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a seller in order to edit the watch information!";
                 return RedirectToAction("BecomeSeller", "Seller");
@@ -173,7 +173,7 @@ namespace WatchHeaven.Web.Controllers
 
             bool isSellerOwner = await this.watchService.IsSellerWithIdOwnerofWatchWithIdAsync(sellerId!, id);
 
-            if (!isSellerOwner)
+            if (!isSellerOwner && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be the seller of this watch in order to edit the watch information";
 
@@ -214,7 +214,7 @@ namespace WatchHeaven.Web.Controllers
 
             bool isUserSeller = await this.sellerService.SellerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserSeller)
+            if (!isUserSeller && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a seller in order to edit the watch information!";
                 return RedirectToAction("BecomeSeller", "Seller");
@@ -224,7 +224,7 @@ namespace WatchHeaven.Web.Controllers
 
             bool isSellerOwner = await this.watchService.IsSellerWithIdOwnerofWatchWithIdAsync(sellerId!, id);
 
-            if (!isSellerOwner)
+            if (!isSellerOwner && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be the seller of this watch in order to edit the watch information";
 
@@ -260,7 +260,7 @@ namespace WatchHeaven.Web.Controllers
 
             bool isUserSeller = await this.sellerService.SellerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserSeller)
+            if (!isUserSeller && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a seller in order to edit the watch information!";
                 return RedirectToAction("BecomeSeller", "Seller");
@@ -270,7 +270,7 @@ namespace WatchHeaven.Web.Controllers
 
             bool isSellerOwner = await this.watchService.IsSellerWithIdOwnerofWatchWithIdAsync(sellerId!, id);
 
-            if (!isSellerOwner)
+            if (!isSellerOwner && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be the seller of this watch in order to edit the watch information";
 
@@ -301,7 +301,7 @@ namespace WatchHeaven.Web.Controllers
 
             bool isUserSeller = await this.sellerService.SellerExistsByUserIdAsync(this.User.GetId()!);
 
-            if (!isUserSeller)
+            if (!isUserSeller && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be a seller in order to edit the watch information!";
                 return RedirectToAction("BecomeSeller", "Seller");
@@ -311,7 +311,7 @@ namespace WatchHeaven.Web.Controllers
 
             bool isSellerOwner = await this.watchService.IsSellerWithIdOwnerofWatchWithIdAsync(sellerId!, id);
 
-            if (!isSellerOwner)
+            if (!isSellerOwner && !this.User.IsAdmin())
             {
                 this.TempData[ErrorMessage] = "You must be the seller of this watch in order to edit the watch information";
 
