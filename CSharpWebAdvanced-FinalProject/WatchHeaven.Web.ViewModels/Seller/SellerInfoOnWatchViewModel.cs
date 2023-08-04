@@ -9,6 +9,8 @@ namespace WatchHeaven.Web.ViewModels.Seller
 {
     public class SellerInfoOnWatchViewModel
     {
+        public string FullName { get; set; } = null!;
+
         public string Email { get; set; } = null!;
 
         [Display(Name = "Phone")]

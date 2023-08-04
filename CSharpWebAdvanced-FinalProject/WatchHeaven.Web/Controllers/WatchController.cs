@@ -15,13 +15,19 @@ namespace WatchHeaven.Web.Controllers
         private readonly IConditionService conditionService;
         private readonly ISellerService sellerService;
         private readonly IWatchService watchService;
+        private readonly IUserService userService;
 
-        public WatchController(ICategoryService categorySerivce, IConditionService conditionService, ISellerService sellerService, IWatchService watchService)
+        public WatchController(ICategoryService categorySerivce, 
+                               IConditionService conditionService, 
+                               ISellerService sellerService,
+                               IWatchService watchService,
+                               IUserService userService)
         {
             this.categoryService = categorySerivce;
             this.conditionService = conditionService;
             this.sellerService = sellerService;
             this.watchService = watchService;
+            this.userService = userService;
 
         }
 
@@ -135,6 +141,7 @@ namespace WatchHeaven.Web.Controllers
             {
                 WatchDetailsViewModel viewModel = await this.watchService
                 .GetDetailsByIdAsync(id);
+                viewModel.Seller.FullName = await this.userService.GetFullNameAsync(User.Identity?.Name!);
 
                 return View(viewModel);
             }
