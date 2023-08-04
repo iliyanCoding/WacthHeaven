@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace WatchHeaven.Services.Data.Interfaces
 {
-    internal interface IUserService
+    public interface IUserService
     {
+        Task<string> GetFullNameAsync(string email);
     }
 }

@@ -8,6 +8,7 @@ using WatchHeaven.Services.Data;
 using WatchHeaven.Services.Data.Interfaces;
 using WatchHeaven.Web.Data;
 using WatchHeaven.Web.Infrastructure.ModelBinders;
+using static WatchHeaven.Common.GeneralApplicationConstants;
 
 namespace WatchHeaven.Web
 {
@@ -36,6 +37,7 @@ namespace WatchHeaven.Web
                     = builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
 
             })
+                .AddRoles<IdentityRole<Guid>>()
                .AddEntityFrameworkStores<WatchHeavenDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IWatchService));
@@ -75,6 +77,8 @@ namespace WatchHeaven.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.SeedAdmin(DevelopmentAdminEmail);
 
             app.MapDefaultControllerRoute();
             app.MapRazorPages();
