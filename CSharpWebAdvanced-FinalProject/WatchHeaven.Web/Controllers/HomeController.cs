@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using WatchHeaven.Services.Data.Interfaces;
 using WatchHeaven.Web.ViewModels.Home;
+using static WatchHeaven.Common.GeneralApplicationConstants;
 
 namespace WatchHeaven.Web.Controllers
 {
@@ -17,6 +18,11 @@ namespace WatchHeaven.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new {Area = AdminRoleName});
+            }
+
             IEnumerable<IndexViewModel> viewModel = await this.watchService.MostExpensiveWatchesAsync();
             return View(viewModel);
         }

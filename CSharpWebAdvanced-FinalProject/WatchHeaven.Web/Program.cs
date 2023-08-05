@@ -82,6 +82,15 @@ namespace WatchHeaven.Web
 
             app.SeedAdmin(DevelopmentAdminEmail);
 
+            app.UseEndpoints(config =>
+            {
+                config.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                config.MapDefaultControllerRoute();
+                config.MapRazorPages();
+            });
+
             app.MapDefaultControllerRoute();
             app.MapRazorPages();
 
