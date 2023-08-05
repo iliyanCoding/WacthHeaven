@@ -1,0 +1,22 @@
+﻿@model MyWatchesViewModel
+
+@{
+    ViewBag.Title = "My Watches";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<h4>My Added Watches</h4>
+
+@if (!Model.AddedWatches.Any())
+{
+    <h2 class="text-center">You have no added watches yet!</h2>
+}
+
+<div class="row">
+    @foreach (var watch in Model.AddedWatches)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_WatchPartial.cshtml", watch)
+    }
+</div>

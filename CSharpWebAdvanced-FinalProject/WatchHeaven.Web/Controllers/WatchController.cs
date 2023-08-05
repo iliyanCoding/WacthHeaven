@@ -5,6 +5,7 @@ using WatchHeaven.Services.Data.Models.Watch;
 using WatchHeaven.Web.Infrastructure.Extensions;
 using WatchHeaven.Web.ViewModels.Watch;
 using static WatchHeaven.Common.NotificationMessageConstants;
+using static WatchHeaven.Common.GeneralApplicationConstants;
 
 namespace WatchHeaven.Web.Controllers
 {
@@ -335,6 +336,11 @@ namespace WatchHeaven.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Mine()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Mine", "House", new {Area = AdminRoleName});
+            }
+
             List<WatchAllViewModel> myWatches = new List<WatchAllViewModel>();
 
             string userId = this.User.GetId()!;

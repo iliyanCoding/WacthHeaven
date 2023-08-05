@@ -27,28 +27,28 @@
         <img class="card-img-top" src="@Model.ImageUrl" alt="Watch Image">
         <div class="card-body text-center">
             <h4>@Model.Brand</h4>
-            <h6>Address: <b>@Model.Model</b></h6>
+            <h6>Model: <b>@Model.Model</b></h6>
             <h6>
                 Price:
                 <b>@($"{Model.Price:f2}") BGN</b>
             </h6>
             <br />
-            <a asp-controller="Watch" asp-action="Details" asp-route-id="@Model.Id"
+            <a asp-area="" asp-controller="Watch" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-success">Details</a>
 
             @if (this.User.Identity?.IsAuthenticated ?? false)
             {
                 @if (this.User.IsAdmin())
                 {
-                    <a asp-controller="Watch" asp-action="Edit" asp-route-id="@Model.Id"
+                    <a asp-area="" asp-controller="Watch" asp-action="Edit" asp-route-id="@Model.Id"
                        class="btn btn-warning">Edit</a>
-                    <a asp-controller="Watch" asp-action="Delete" asp-route-id="@Model.Id"
+                    <a asp-area="" asp-controller="Watch" asp-action="Delete" asp-route-id="@Model.Id"
                        class="btn btn-danger">Delete</a>
 
                 } 
                 <p></p>
 
-                <form class="input-group-md" asp-controller="Watch"
+                <form class="input-group-md" asp-area="" asp-controller="Watch"
                   asp-action="Buy" asp-route-id="@Model.Id" method="post">
                     <input class="btn btn-primary" type="submit" value="Buy" />
                 </form>
