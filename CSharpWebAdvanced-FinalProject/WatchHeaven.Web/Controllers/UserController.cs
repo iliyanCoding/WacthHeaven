@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using WatchHeaven.Data.Model;
 using WatchHeaven.Web.ViewModels.User;
 using static WatchHeaven.Common.NotificationMessageConstants;
+using static WatchHeaven.Common.GeneralApplicationConstants;
 
 namespace WatchHeaven.Web.Controllers
 {
@@ -13,14 +15,17 @@ namespace WatchHeaven.Web.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserStore<ApplicationUser> userStore;
+        private readonly IMemoryCache memoryCache; 
 
         public UserController(SignInManager<ApplicationUser> signInManager, 
                               UserManager<ApplicationUser> userManager,
-                              IUserStore<ApplicationUser> userStore) 
+                              IUserStore<ApplicationUser> userStore,
+                              IMemoryCache memoryCache) 
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.userStore = userStore;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -59,6 +64,7 @@ namespace WatchHeaven.Web.Controllers
             }
 
             await this.signInManager.SignInAsync(user, false);
+            this.memoryCache.Remove(UsersCacheKey);
 
             return RedirectToAction("Index", "Home");
         }
