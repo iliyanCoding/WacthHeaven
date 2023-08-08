@@ -10,6 +10,7 @@ namespace WatchHeaven.Services.Tests
         public static ApplicationUser SellerUser;
         public static Seller Seller;
         public static Watch Watch;
+        public static ICollection<Category> Categories;
 
         public static void SeedDb(WatchHeavenDbContext dbContext)
         {
@@ -51,9 +52,20 @@ namespace WatchHeaven.Services.Tests
                 SellerId = Guid.Parse("c1ff0048-2c60-45bf-a111-123405281b43")
             };
 
+            Categories = new List<Category>
+            {
+            new Category { Id = 1, Name = "Vintage" },
+            new Category { Id = 2, Name = "Pilot's" },
+            new Category { Id = 3, Name = "Diving" },
+            // Add more categories as needed
+            };
+
+
+
             dbContext.Users.Add(SellerUser);
             dbContext.Sellers.Add(Seller);
             dbContext.Watches.Add(Watch);
+            dbContext.Categories.AddRange(Categories);
 
             dbContext.SaveChanges();
         }
