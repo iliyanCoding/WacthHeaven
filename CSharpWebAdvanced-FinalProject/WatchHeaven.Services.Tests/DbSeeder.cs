@@ -11,6 +11,7 @@ namespace WatchHeaven.Services.Tests
         public static Seller Seller;
         public static Watch Watch;
         public static ICollection<Category> Categories;
+        public static ICollection<Condition> Conditions;
 
         public static void SeedDb(WatchHeavenDbContext dbContext)
         {
@@ -57,15 +58,20 @@ namespace WatchHeaven.Services.Tests
             new Category { Id = 1, Name = "Vintage" },
             new Category { Id = 2, Name = "Pilot's" },
             new Category { Id = 3, Name = "Diving" },
-            // Add more categories as needed
             };
 
-
+            Conditions = new List<Condition>
+            {
+            new Condition { Id = 1, Name = "New" },
+            new Condition { Id = 2, Name = "Very Good" },
+            new Condition { Id = 3, Name = "Fair" },
+            };
 
             dbContext.Users.Add(SellerUser);
             dbContext.Sellers.Add(Seller);
             dbContext.Watches.Add(Watch);
             dbContext.Categories.AddRange(Categories);
+            dbContext.Conditions.AddRange(Conditions);
 
             dbContext.SaveChanges();
         }
