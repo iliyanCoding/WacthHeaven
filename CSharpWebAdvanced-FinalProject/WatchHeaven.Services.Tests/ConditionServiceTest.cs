@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WatchHeaven.Services.Tests
 {
-    internal class ConditionServiceTest
+    public class ConditionServiceTest
     {
     }
 }
