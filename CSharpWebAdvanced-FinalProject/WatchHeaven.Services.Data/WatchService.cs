@@ -88,15 +88,15 @@ namespace WatchHeaven.Services.Data
         {
             IEnumerable<WatchAllViewModel> allSellerWatches = await this.dbContext
                    .Watches
-                   .Where(w => w.SellerId.ToString() == sellerId && 
+                   .Where(w => w.SellerId.ToString() == sellerId &&
                           w.IsActive)
                    .Select(w => new WatchAllViewModel()
                    {
                        Id = w.Id.ToString(),
                        Model = w.Model,
                        Brand = w.Brand,
-                       ImageUrl= w.ImageUrl,
-                       Price= w.Price
+                       ImageUrl = w.ImageUrl,
+                       Price = w.Price
                    })
                    .ToArrayAsync();
 
@@ -105,7 +105,7 @@ namespace WatchHeaven.Services.Data
 
         public async Task<string> CreateAsync(WatchFormViewModel model, string sellerId)
         {
-            Watch watch = new Watch() 
+            Watch watch = new Watch()
             {
                 Brand = model.Brand,
                 Model = model.Model,
@@ -179,8 +179,8 @@ namespace WatchHeaven.Services.Data
                 Id = watch.Id.ToString(),
                 Model = watch.Model,
                 Brand = watch.Brand,
-                ImageUrl= watch.ImageUrl,
-                Price= watch.Price,
+                ImageUrl = watch.ImageUrl,
+                Price = watch.Price,
                 Description = watch.Description,
                 Category = watch.Category.Name,
                 Condition = watch.Condition.Name,
@@ -237,6 +237,26 @@ namespace WatchHeaven.Services.Data
             };
         }
 
+        public async Task<WatchAllViewModel> GetWatchInfoByWatchIdAsync(string watchId)
+        {
+            WatchAllViewModel? watch = await this.dbContext
+                .Watches
+                .Where(w => w.Id.ToString() == watchId)
+                .Select(w => new WatchAllViewModel()
+                {
+                    Id = w.Id.ToString(),
+                    Brand = w.Brand,
+                    Model = w.Model,
+                    ImageUrl = w.ImageUrl,
+                    Price = w.Price
+                })
+                .FirstOrDefaultAsync();
+
+
+            return watch;
+
+        }
+
         public async Task<bool> IsSellerWithIdOwnerofWatchWithIdAsync(string sellerId, string watchId)
         {
             Watch watch = await this.dbContext
@@ -264,7 +284,7 @@ namespace WatchHeaven.Services.Data
                 .ToArrayAsync();
 
             return mostExpensiveWatches;
-                
+
         }
     }
 }

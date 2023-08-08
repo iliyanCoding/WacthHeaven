@@ -36,5 +36,7 @@ namespace WatchHeaven.Services.Data.Interfaces
 
         Task<StatisticsServiceModel> GetStatisticsAsync();
 
+        Task<WatchAllViewModel> GetWatchInfoByWatchIdAsync(string watchId);
+
     }
 }

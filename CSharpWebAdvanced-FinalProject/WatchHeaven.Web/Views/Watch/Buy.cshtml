@@ -1,0 +1,61 @@
+﻿@model WatchAllViewModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="container mt-5">
+    <h1>Checkout</h1>
+    <p>Review your order and proceed to payment:</p>
+
+    <!-- Order Summary -->
+    <div class="card mb-3">
+        <div class="card-header">Order Summary</div>
+        <div class="card-body">
+            <!-- Display watch image, details, quantity, and total price -->
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="@Model.ImageUrl" class="img-fluid" alt="Watch Image" style="max-width: 120px;">
+                </div>
+                <div class="col-md-8">
+                    <p>Brand: @Model.Brand</p>
+                    <p>Model: @Model.Model</p>
+                    <p>Total Price: $@Model.Price</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Form -->
+    <form method="post">
+        <!-- User Information -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+
+        <!-- Shipping Address -->
+        <div class="mb-3">
+            <label for="address" class="form-label">Shipping Address</label>
+            <textarea class="form-control" id="address" name="address" required></textarea>
+        </div>
+
+        <!-- Payment Options -->
+        <div class="mb-3">
+            <label for="payment" class="form-label">Payment Method</label>
+            <select class="form-control" id="payment" name="payment" required>
+                <option value="">Select Payment Method</option>
+                <option value="creditcard">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <!-- Add more payment options as needed -->
+            </select>
+        </div>
+
+        <!-- Terms and Conditions -->
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+            <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Complete Purchase</button>
+    </form>
+</div>

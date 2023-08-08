@@ -357,6 +357,50 @@ namespace WatchHeaven.Web.Controllers
             return View(myWatches);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Buy(string id)
+        {
+            bool exists = await this.watchService.ExistsByIdAsync(id);
+            if (!exists)
+            {
+                this.TempData[ErrorMessage] = "Watch with this id does not exist!";
+                return RedirectToAction("All", "Watch");
+            }
+
+            WatchAllViewModel viewModel = await this.watchService.GetWatchInfoByWatchIdAsync(id);
+
+            if (viewModel == null)
+            {
+                this.TempData[WarningMessage] = "There is a problem with this watch. Please try again later or contact administrator";
+                return RedirectToAction("Details", "Watch", new { id = id});
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Buy(string id, WatchAllViewModel viewModel)
+        {
+            bool exists = await this.watchService.ExistsByIdAsync(id);
+            if (!exists)
+            {
+                this.TempData[ErrorMessage] = "Watch with this id does not exist!";
+                return RedirectToAction("All", "Watch");
+            }
+
+            try
+            {
+                await this.watchService.DeleteWatchByIdAsync(id);
+
+                this.TempData[SuccessMessage] = "The watch was ordered successfully!";
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+        }
+
         private IActionResult GeneralError()
         {
             this.TempData[ErrorMessage] = "Unexpected error occurred. Please try again later or contact administrator!";
