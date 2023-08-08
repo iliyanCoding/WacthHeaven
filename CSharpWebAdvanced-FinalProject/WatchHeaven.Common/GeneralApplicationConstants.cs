@@ -11,6 +11,5 @@
         public const string DevelopmentAdminEmail = "admin@watchheaven.com";
 
         public const string UsersCacheKey = "4a1fe306-5db0-42a8-b0eb-0ae5adeb5263";
-        public const string 
     }
 }

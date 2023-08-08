@@ -47,6 +47,21 @@ namespace WatchHeaven.Services.Data
             return seller.Id.ToString();
         }
 
+        public async Task<bool> HasWatchWithIdAsync(string userId, string watchId)
+        {
+            Seller? seller = await dbContext
+                .Sellers
+                .Include(a => a.OwnedWatches)
+                .FirstOrDefaultAsync(a => a.UserId.ToString() == userId);
+            if (seller == null)
+            {
+                return false;
+            }
+
+            watchId = watchId.ToLower();
+            return seller.OwnedWatches.Any(h => h.Id.ToString() == watchId);
+        }
+
         public async Task<bool> SellerExistsByAddressAsync(string address)
         {
             bool result = await this.dbContext

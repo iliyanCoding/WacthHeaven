@@ -21,6 +21,5 @@ namespace WatchHeaven.Data.Model
         public string LastName { get; set; } = null!;
 
         public virtual ICollection<Watch> FavouriteWatches { get; set; }
-
     }
 }

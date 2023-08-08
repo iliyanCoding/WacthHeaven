@@ -14,6 +14,7 @@ namespace WatchHeaven.Data.Model
         public Watch()
         {
             this.Id = Guid.NewGuid();
+
         }
 
 
@@ -57,6 +58,5 @@ namespace WatchHeaven.Data.Model
         public Guid SellerId { get; set; }
 
         public Seller Seller { get; set; } = null!;
-
     }
 }

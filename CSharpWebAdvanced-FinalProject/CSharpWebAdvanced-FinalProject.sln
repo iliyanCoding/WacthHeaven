@@ -25,7 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchHeaven.Web.Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchHeaven.Services.Data.Models", "WatchHeaven.Services.Data.Models\WatchHeaven.Services.Data.Models.csproj", "{8753672C-C09F-45A4-AA6B-BDFCE3892E6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchHeaven.WebApi", "WatchHeaven.WebApi\WatchHeaven.WebApi.csproj", "{EC596E94-8296-40C6-B188-E6B88A9C8A3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchHeaven.WebApi", "WatchHeaven.WebApi\WatchHeaven.WebApi.csproj", "{EC596E94-8296-40C6-B188-E6B88A9C8A3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{98C9CB30-5C77-4FC1-B90A-6A8B935E2123}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchHeaven.Services.Tests", "WatchHeaven.Services.Tests\WatchHeaven.Services.Tests.csproj", "{31C20181-D77A-4444-9EAE-20E6ECF8B9C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,10 @@ Global
 		{EC596E94-8296-40C6-B188-E6B88A9C8A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC596E94-8296-40C6-B188-E6B88A9C8A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC596E94-8296-40C6-B188-E6B88A9C8A3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31C20181-D77A-4444-9EAE-20E6ECF8B9C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31C20181-D77A-4444-9EAE-20E6ECF8B9C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31C20181-D77A-4444-9EAE-20E6ECF8B9C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31C20181-D77A-4444-9EAE-20E6ECF8B9C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +90,7 @@ Global
 		{4A1E4D88-6695-45A4-A8E6-8A7CA9A96C61} = {5E9BA2A2-92BF-4F16-B544-2420BF64FE87}
 		{8753672C-C09F-45A4-AA6B-BDFCE3892E6B} = {81F7F322-4DA2-4BA1-ABE1-E8FA7E127A0A}
 		{EC596E94-8296-40C6-B188-E6B88A9C8A3F} = {5E9BA2A2-92BF-4F16-B544-2420BF64FE87}
+		{31C20181-D77A-4444-9EAE-20E6ECF8B9C5} = {98C9CB30-5C77-4FC1-B90A-6A8B935E2123}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7E8571E-C1AB-4AF2-A1F5-B647D892E2DB}

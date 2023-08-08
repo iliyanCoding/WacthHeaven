@@ -1,6 +1,11 @@
 ﻿@using WatchHeaven.Services.Data.Interfaces
 @using WatchHeaven.Web.Infrastructure.Extensions
 @model WatchDetailsViewModel
+@inject ISellerService SellerService
+@{
+    bool isUserSeller = await SellerService.SellerExistsByUserIdAsync(this.User.GetId()!);
+    bool isSellerOwnerOfTheWatch = await SellerService.HasWatchWithIdAsync(this.User.GetId(), Model.Id);
+}
 
 @{
     ViewBag.Title = "Watch Details";
@@ -28,7 +33,7 @@
             <div class="form-inline">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
-                    @if (this.User.IsAdmin())
+                    @if ((isUserSeller && isSellerOwnerOfTheWatch) || this.User.IsAdmin())
                     {
                         <a class="btn btn-warning" asp-controller="Watch" asp-action="Edit"
                    asp-route-id="@Model.Id">Edit</a>
