@@ -53,6 +53,25 @@ namespace WatchHeaven.Services.Tests
                 SellerId = Guid.Parse("c1ff0048-2c60-45bf-a111-123405281b43")
             };
 
+            dbContext.Watches.Add(Watch);
+
+            Watch = new Watch()
+            {
+                Id = Guid.Parse("b4249945-b9d9-4a26-82a0-b5bbc30d20f4"),
+                Brand = "Test brand 2",
+                Model = "Test model 2",
+                Description = "A really cool watch for testing",
+                Price = 2550.00m,
+                ImageUrl = "randomImgUrl2",
+                AddedOn = DateTime.UtcNow,
+                IsActive = true,
+                CategoryId = 2,
+                ConditionId = 2,
+                SellerId = Guid.Parse("c1ff0048-2c60-45bf-a111-123405281b43")
+            };
+
+            dbContext.Watches.Add(Watch);
+
             Categories = new List<Category>
             {
             new Category { Id = 1, Name = "Vintage" },
@@ -69,7 +88,6 @@ namespace WatchHeaven.Services.Tests
 
             dbContext.Users.Add(SellerUser);
             dbContext.Sellers.Add(Seller);
-            dbContext.Watches.Add(Watch);
             dbContext.Categories.AddRange(Categories);
             dbContext.Conditions.AddRange(Conditions);
 
