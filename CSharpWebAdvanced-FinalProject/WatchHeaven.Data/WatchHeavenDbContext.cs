@@ -26,13 +26,13 @@ namespace WatchHeaven.Web.Data
 
         public DbSet<Watch> Watches { get; set; } = null!;
 
+        //public DbSet<UserFavoriteWatch> UserFavoriteWatches { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
-            //Assembly configAssembly = Assembly.GetAssembly(typeof(WatchHeavenDbContext)) ??
-            //                          Assembly.GetExecutingAssembly();
-
-            //builder.ApplyConfigurationsFromAssembly(configAssembly);
+            builder.Entity<UserFavoriteWatch>()
+            .HasKey(ufw => new { ufw.UserId, ufw.WatchId });
 
             builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
             builder.ApplyConfiguration(new WatchEntityConfiguration());

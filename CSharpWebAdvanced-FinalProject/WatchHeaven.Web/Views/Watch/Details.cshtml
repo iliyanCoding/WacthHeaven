@@ -10,7 +10,6 @@
 @{
     ViewBag.Title = "Watch Details";
 }
-
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
@@ -36,10 +35,13 @@
                     @if ((isUserSeller && isSellerOwnerOfTheWatch) || this.User.IsAdmin())
                     {
                         <a class="btn btn-warning" asp-controller="Watch" asp-action="Edit"
-                   asp-route-id="@Model.Id">Edit</a>
+                             asp-route-id="@Model.Id">Edit</a>
                         <a class="ml-2 btn btn-danger" asp-controller="Watch" asp-action="Delete"
-                   asp-route-id="@Model.Id">Delete</a>
+                            asp-route-id="@Model.Id">Delete</a>
                     }
+                    <form method="post" asp-controller="User" asp-action="AddToFavorites" asp-route-id="@Model.Id">
+                        <button type="submit" class="btn btn-outline-danger">Add to Favorites</button>
+                    </form>
                 }
                 <a class="btn btn-primary" asp-controller="Watch" asp-action="Buy"
                    asp-route-id="@Model.Id">Buy</a>
@@ -56,3 +58,4 @@
         </div>
     </div>
 </div>
+

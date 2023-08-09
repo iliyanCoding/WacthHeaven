@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WatchHeaven.Web.Data;
 
@@ -11,9 +12,10 @@ using WatchHeaven.Web.Data;
 namespace WatchHeaven.Data.Migrations
 {
     [DbContext(typeof(WatchHeavenDbContext))]
-    partial class WatchHeavenDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230809144757_AddedFavouriteWatchToTheUser")]
+    partial class AddedFavouriteWatchToTheUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -363,21 +365,6 @@ namespace WatchHeaven.Data.Migrations
                     b.ToTable("Sellers");
                 });
 
-            modelBuilder.Entity("WatchHeaven.Data.Model.UserFavoriteWatch", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("WatchId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "WatchId");
-
-                    b.HasIndex("WatchId");
-
-                    b.ToTable("UserFavoriteWatch");
-                });
-
             modelBuilder.Entity("WatchHeaven.Data.Model.Watch", b =>
                 {
                     b.Property<Guid>("Id")
@@ -439,7 +426,7 @@ namespace WatchHeaven.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("96bc91e9-e97f-421d-92bd-38fd0e434944"),
+                            Id = new Guid("6950514e-4e29-4fd2-9ac6-a4c17a98b4fb"),
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Brand = "Universal Geneve",
                             CategoryId = 2,
@@ -453,7 +440,7 @@ namespace WatchHeaven.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2d3b5895-3763-461c-8ab9-ba37e727b448"),
+                            Id = new Guid("d1376bd1-5f63-4181-8ad0-8ca60540665a"),
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Brand = "IWC Portuguese Chronograph",
                             CategoryId = 1,
@@ -467,7 +454,7 @@ namespace WatchHeaven.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dab01b4a-e4f9-4fb9-a735-c45d8f9dd8cf"),
+                            Id = new Guid("4bc9fcf1-406e-47cc-a34a-628743d3621d"),
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Brand = "Seiko",
                             CategoryId = 3,
@@ -481,7 +468,7 @@ namespace WatchHeaven.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f0b3550a-71af-4c17-980f-5c2db13a6944"),
+                            Id = new Guid("c1484108-11a9-4ca6-a51e-631b6eb688f4"),
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Brand = "Breitling",
                             CategoryId = 4,
@@ -495,7 +482,7 @@ namespace WatchHeaven.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1f97198f-06cb-4197-9f79-7f75cb9e8bb0"),
+                            Id = new Guid("3cb2ed92-0af5-462b-b7d7-2910bb742d7c"),
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Brand = "Zenith",
                             CategoryId = 5,
@@ -509,7 +496,7 @@ namespace WatchHeaven.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f604345c-3586-400d-b918-4eb7bfd5702e"),
+                            Id = new Guid("27297f15-c915-49a5-b6c1-879ec7a876d4"),
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Brand = "Universal Geneve",
                             CategoryId = 2,
@@ -523,7 +510,7 @@ namespace WatchHeaven.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f2bfb2e7-d04c-4d6b-93d6-dc627748927e"),
+                            Id = new Guid("6273f6db-8932-4daa-a1eb-f663ce96ec09"),
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Brand = "IWC Portuguese Chronograph",
                             CategoryId = 1,
@@ -537,7 +524,7 @@ namespace WatchHeaven.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f877500f-3f68-42a1-a77d-e276d2e0300b"),
+                            Id = new Guid("72fb92d3-9de9-42a0-acd1-cde82a3580ef"),
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Brand = "Seiko",
                             CategoryId = 3,
@@ -551,7 +538,7 @@ namespace WatchHeaven.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("441a2117-6280-44c1-b44d-e9ceda46992a"),
+                            Id = new Guid("9f6a03bf-b2c4-4b73-9374-dac1b91ecf68"),
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Brand = "Breitling",
                             CategoryId = 4,
@@ -565,7 +552,7 @@ namespace WatchHeaven.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("34dc45a8-df8a-4ab0-aeff-2c75d893516f"),
+                            Id = new Guid("d8c264b7-3959-4278-8dce-54560790ad89"),
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Brand = "Zenith",
                             CategoryId = 5,
@@ -654,25 +641,6 @@ namespace WatchHeaven.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WatchHeaven.Data.Model.UserFavoriteWatch", b =>
-                {
-                    b.HasOne("WatchHeaven.Data.Model.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WatchHeaven.Data.Model.Watch", "Watch")
-                        .WithMany()
-                        .HasForeignKey("WatchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-
-                    b.Navigation("Watch");
                 });
 
             modelBuilder.Entity("WatchHeaven.Data.Model.Watch", b =>

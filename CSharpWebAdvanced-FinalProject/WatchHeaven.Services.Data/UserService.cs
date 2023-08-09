@@ -20,6 +20,47 @@ namespace WatchHeaven.Services.Data
             this.dbContext = dbContext;
         }
 
+        public async Task<bool> AddWatchToFavoritesAsync(string userId, string watchId)
+        {
+
+            var user = await dbContext.Users
+                .FirstOrDefaultAsync(u => u.Id.ToString() == userId);
+
+            if (user == null)
+            {
+                // User not found
+                return false;
+            }
+
+            var watch = await dbContext.Watches
+                .FirstOrDefaultAsync(w => w.Id.ToString() == watchId);
+
+            if (watch == null)
+            {
+                // Watch not found
+                return false;
+            }
+
+            user.FavoriteWatches.Add(watch);
+
+            try
+            {
+                dbContext.Entry(user).State = EntityState.Modified;
+                await dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                // Handle the exception as needed
+                return false;
+            }
+
+
+
+
+        }
+
         public async Task<IEnumerable<UserViewModel>> GetAllUsersAsync()
         {
             List<UserViewModel> users = await this.dbContext

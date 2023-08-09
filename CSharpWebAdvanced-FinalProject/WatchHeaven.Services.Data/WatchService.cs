@@ -192,6 +192,23 @@ namespace WatchHeaven.Services.Data
             };
         }
 
+        public async Task<IEnumerable<WatchAllViewModel>> GetFavoriteWatchesAsync(string userId)
+        {
+            var user = await dbContext.Users
+                .Include(u => u.FavoriteWatches)
+                .FirstOrDefaultAsync(u => u.Id.ToString() == userId);
+
+            return user?.FavoriteWatches.Select(ufw => new WatchAllViewModel
+            {
+                Brand = ufw.Brand,
+                ImageUrl = ufw.ImageUrl,
+                Price = ufw.Price,
+                Model = ufw.Model,
+                Id = ufw.Id.ToString(),
+            });
+        }
+
+
         public async Task<StatisticsServiceModel> GetStatisticsAsync()
         {
             return new StatisticsServiceModel()

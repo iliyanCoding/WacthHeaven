@@ -14,6 +14,11 @@ namespace WatchHeaven.Data.Configuration
 
             builder.Property(u => u.LastName)
                 .HasDefaultValue("LastNameTest");
+
+            builder
+            .HasMany(u => u.FavoriteWatches)
+            .WithMany(w => w.UsersWhoFavorited)
+            .UsingEntity(j => j.ToTable("UserFavoriteWatches"));
         }
     }
 }

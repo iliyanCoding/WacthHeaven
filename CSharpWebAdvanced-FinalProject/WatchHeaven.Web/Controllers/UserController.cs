@@ -7,6 +7,9 @@ using WatchHeaven.Data.Model;
 using WatchHeaven.Web.ViewModels.User;
 using static WatchHeaven.Common.NotificationMessageConstants;
 using static WatchHeaven.Common.GeneralApplicationConstants;
+using WatchHeaven.Web.Infrastructure.Extensions;
+using WatchHeaven.Services.Data.Interfaces;
+using WatchHeaven.Services.Data;
 
 namespace WatchHeaven.Web.Controllers
 {
@@ -15,17 +18,24 @@ namespace WatchHeaven.Web.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserStore<ApplicationUser> userStore;
-        private readonly IMemoryCache memoryCache; 
+        private readonly IMemoryCache memoryCache;
+        private readonly IUserService userService;
+        private readonly IWatchService watchService;
 
-        public UserController(SignInManager<ApplicationUser> signInManager, 
+        public UserController(SignInManager<ApplicationUser> signInManager,
                               UserManager<ApplicationUser> userManager,
                               IUserStore<ApplicationUser> userStore,
-                              IMemoryCache memoryCache) 
+                              IMemoryCache memoryCache,
+                              IUserService userService,
+                              IWatchService watchService)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.userStore = userStore;
             this.memoryCache = memoryCache;
+            this.userService = userService;
+            this.watchService = watchService;
+
         }
 
         [HttpGet]
@@ -74,10 +84,10 @@ namespace WatchHeaven.Web.Controllers
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            LoginFormViewModel viewModel = new LoginFormViewModel() 
-            { 
+            LoginFormViewModel viewModel = new LoginFormViewModel()
+            {
                 ReturnUrl = returnUrl,
-            }; 
+            };
             return View(viewModel);
 
         }
@@ -91,9 +101,9 @@ namespace WatchHeaven.Web.Controllers
                 return View(viewModel);
             }
 
-            var result = 
+            var result =
                 await this.signInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, viewModel.RememberMe, false);
-        
+
             if (!result.Succeeded)
             {
                 this.TempData[ErrorMessage] = "Unexpected error occured. Please try again later or contact administrator.";
@@ -101,6 +111,30 @@ namespace WatchHeaven.Web.Controllers
             }
 
             return Redirect(viewModel.ReturnUrl ?? "/Home/Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToFavorites(string id)
+        {
+            var userId = User.GetId();
+
+            var success = await userService.AddWatchToFavoritesAsync(userId, id);
+
+            if (!success)
+            {
+                this.TempData[ErrorMessage] = "Unexpected error occured. Please try again later or contact administrator.";
+                return View();
+            }
+
+            this.TempData[SuccessMessage] = "You added this watch to your favorites";
+            return RedirectToAction("Details", "Watch", new { id = id });
+        }
+
+        public async Task<IActionResult> Favorite()
+        {
+            var userId = User.GetId(); // Get the user's ID
+            var favoriteWatches = await watchService.GetFavoriteWatchesAsync(userId);
+            return View("Favorite", favoriteWatches);
         }
     }
 }

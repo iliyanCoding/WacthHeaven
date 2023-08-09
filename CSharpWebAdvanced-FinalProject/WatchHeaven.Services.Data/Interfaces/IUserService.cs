@@ -14,5 +14,7 @@ namespace WatchHeaven.Services.Data.Interfaces
         Task<string> GetFullNameByIdAsync(string userId);
 
         Task<IEnumerable<UserViewModel>> GetAllUsersAsync();
+
+        Task<bool> AddWatchToFavoritesAsync(string userId, string watchId);
     }
 }

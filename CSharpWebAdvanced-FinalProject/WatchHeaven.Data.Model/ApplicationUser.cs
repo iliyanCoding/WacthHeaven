@@ -9,7 +9,7 @@ namespace WatchHeaven.Data.Model
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid();
-            this.FavouriteWatches = new HashSet<Watch>();
+            this.FavoriteWatches = new HashSet<Watch>();
         }
 
         [Required]
@@ -20,6 +20,6 @@ namespace WatchHeaven.Data.Model
         [MaxLength(LastNameMaxLength)]
         public string LastName { get; set; } = null!;
 
-        public virtual ICollection<Watch> FavouriteWatches { get; set; }
+        public virtual ICollection<Watch> FavoriteWatches { get; set; }
     }
 }

@@ -38,5 +38,7 @@ namespace WatchHeaven.Services.Data.Interfaces
 
         Task<WatchAllViewModel> GetWatchInfoByWatchIdAsync(string watchId);
 
+        Task<IEnumerable<WatchAllViewModel>> GetFavoriteWatchesAsync(string userId);
+
     }
 }

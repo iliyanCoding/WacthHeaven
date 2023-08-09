@@ -16,3 +16,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.custom-heart {
+    color: red; /* Set your desired color here */
+}

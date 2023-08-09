@@ -58,5 +58,7 @@ namespace WatchHeaven.Data.Model
         public Guid SellerId { get; set; }
 
         public Seller Seller { get; set; } = null!;
+
+        public ICollection<ApplicationUser> UsersWhoFavorited { get; set; } = new HashSet<ApplicationUser>();
     }
 }
