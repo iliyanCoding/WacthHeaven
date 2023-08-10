@@ -1,10 +1,13 @@
-﻿@using WatchHeaven.Services.Data.Interfaces
+﻿@using Microsoft.AspNetCore.Identity;
+@using WatchHeaven.Services.Data.Interfaces
 @using WatchHeaven.Web.Infrastructure.Extensions
 @model WatchDetailsViewModel
 @inject ISellerService SellerService
+@inject IUserService userService;
 @{
     bool isUserSeller = await SellerService.SellerExistsByUserIdAsync(this.User.GetId()!);
     bool isSellerOwnerOfTheWatch = await SellerService.HasWatchWithIdAsync(this.User.GetId(), Model.Id);
+    var isWatchInFavorites = await userService.IsWatchInFavoritesAsync(User.GetId(), Model.Id);
 }
 
 @{
@@ -34,14 +37,24 @@
                 {
                     @if ((isUserSeller && isSellerOwnerOfTheWatch) || this.User.IsAdmin())
                     {
-                        <a class="btn btn-warning" asp-controller="Watch" asp-action="Edit"
+                        <a class="btn btn-warning" asp-controller="Watch" asp-action="Edit" asp-area=" "
                              asp-route-id="@Model.Id">Edit</a>
-                        <a class="ml-2 btn btn-danger" asp-controller="Watch" asp-action="Delete"
+                        <a class="ml-2 btn btn-danger" asp-controller="Watch" asp-action="Delete" asp-area=""
                             asp-route-id="@Model.Id">Delete</a>
                     }
-                    <form method="post" asp-controller="User" asp-action="AddToFavorites" asp-route-id="@Model.Id">
-                        <button type="submit" class="btn btn-outline-danger">Add to Favorites</button>
-                    </form>
+                    @if (!isWatchInFavorites)
+                    {
+                        <form method="post" asp-controller="User" asp-action="AddToFavorites" asp-route-id="@Model.Id" asp-area="">
+                            <button type="submit" class="btn btn-outline-danger">Add to Favorites</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" asp-controller="User" asp-action="RemoveFromFavorites" asp-route-id="@Model.Id" asp-area="">
+                            <button type="submit" class="btn btn-outline-danger">Remove from Favorites</button>
+                        </form>
+                    }
+
                 }
                 <a class="btn btn-primary" asp-controller="Watch" asp-action="Buy"
                    asp-route-id="@Model.Id">Buy</a>

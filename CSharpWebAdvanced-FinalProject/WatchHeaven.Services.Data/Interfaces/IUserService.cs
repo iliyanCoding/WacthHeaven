@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,11 @@ namespace WatchHeaven.Services.Data.Interfaces
         Task<IEnumerable<UserViewModel>> GetAllUsersAsync();
 
         Task<bool> AddWatchToFavoritesAsync(string userId, string watchId);
+
+        Task<bool> IsWatchInFavoritesAsync(string userId, string watchId);
+
+        Task<bool> RemoveFromFavoritesAsync(string userId, string watchId);
+       
+
     }
 }

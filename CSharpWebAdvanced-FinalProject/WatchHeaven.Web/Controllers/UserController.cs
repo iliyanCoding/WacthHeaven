@@ -130,6 +130,19 @@ namespace WatchHeaven.Web.Controllers
             return RedirectToAction("Details", "Watch", new { id = id });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromFavorites(string id)
+        {
+            var userId = User.GetId();
+
+            if (await userService.IsWatchInFavoritesAsync(userId, id))
+            {
+                await userService.RemoveFromFavoritesAsync(userId, id);
+            }
+
+            return RedirectToAction("Favorite", "User", new { id });
+        }
+
         public async Task<IActionResult> Favorite()
         {
             var userId = User.GetId(); // Get the user's ID

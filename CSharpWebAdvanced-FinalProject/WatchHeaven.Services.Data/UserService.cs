@@ -121,5 +121,37 @@ namespace WatchHeaven.Services.Data
 
             return user.FirstName + " " + user.LastName;
         }
+
+        public async Task<bool> IsWatchInFavoritesAsync(string userId, string watchId)
+        {
+            var user = await dbContext.Users
+                .Include(u => u.FavoriteWatches)
+                .FirstOrDefaultAsync(u => u.Id.ToString() == userId);
+
+            return user?.FavoriteWatches.Any(fw => fw.Id.ToString() == watchId) ?? false;
+        }
+
+        public async Task<bool> RemoveFromFavoritesAsync(string userId, string watchId)
+        {
+
+            var user = await dbContext.Users
+                .Include(u => u.FavoriteWatches)
+                .FirstOrDefaultAsync(u => u.Id.ToString() == userId);
+
+            if (user != null)
+            {
+                var watchToRemove = user.FavoriteWatches.FirstOrDefault(fw => fw.Id.ToString() == watchId);
+                if (watchToRemove != null)
+                {
+                    user.FavoriteWatches.Remove(watchToRemove);
+                    await dbContext.SaveChangesAsync();
+                    return true;
+                }
+            }
+
+            return false;
+
+
+        }
     }
 }
