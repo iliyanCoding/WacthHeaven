@@ -1,6 +1,6 @@
 # WatchHeaven Web App Documentation
 
-Welcome to the WatchHeaven README! This document provides an overview of the WatchHub web application, where users can buy and sell watches. If you're new to WatchHeaven, this guide will help you get started and understand the core features of the platform.
+Welcome to the WatchHeaven README! This document provides an overview of the WatchHeaven web application, where users can buy and sell watches. If you're new to WatchHeaven, this guide will help you get started and understand the core features of the platform.
 
 ## Table of Contents
 
