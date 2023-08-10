@@ -55,8 +55,8 @@
                 <a class="btn btn-primary ml-2" asp-controller="Watch" asp-action="Buy" asp-route-id="@Model.Id">Buy</a>
                 <br>
                 <hr>
-                <a class="btn btn-outline-primary ml-2" asp-controller="Comment" asp-action="Comments" asp-route-watchId="@Model.Id">Go to Comments</a>
-                <form class="ml-2" asp-controller="Comment" asp-action="AddComment" method="post">
+                <a class="btn btn-outline-primary ml-2" asp-controller="Comment" asp-action="Comments" asp-route-watchId="@Model.Id" asp-area="">Go to Comments</a>
+                <form class="ml-2" asp-controller="Comment" asp-action="AddComment" asp-area="" method="post">
                     <input type="hidden" name="watchId" value="@Model.Id" />
                     <div class="form-group">
                         <label for="commentText">Add a Comment:</label>

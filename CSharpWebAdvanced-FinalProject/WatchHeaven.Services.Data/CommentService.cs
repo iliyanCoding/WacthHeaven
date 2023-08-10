@@ -51,5 +51,26 @@ namespace WatchHeaven.Services.Data
             dbContext.Comments.Add(comment);
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task DeleteCommentAsync(string commentId, string userId)
+        {
+            var comment = await dbContext.Comments
+                .FirstOrDefaultAsync(c => c.Id.ToString() == commentId && c.UserId.ToString() == userId);
+
+            if (comment != null)
+            {
+                comment.IsActive = false;
+                await dbContext.SaveChangesAsync();
+            }
+
+        }
+
+        public async Task<bool> IsUserAuthorOfTheComment(string commentId, string userId)
+        {
+
+            var comment = await dbContext.Comments.FirstOrDefaultAsync(c =>c.Id.ToString() == commentId);
+            return comment != null && comment.UserId.ToString() == userId;
+
+        }
     }
 }

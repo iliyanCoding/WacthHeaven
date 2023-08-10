@@ -1,4 +1,7 @@
-﻿@using WatchHeaven.Web.ViewModels.Comment;
+﻿@using WatchHeaven.Services.Data.Interfaces;
+@using WatchHeaven.Web.Infrastructure.Extensions;
+@using WatchHeaven.Web.ViewModels.Comment;
+@inject ICommentService commentService
 @model IEnumerable<CommentViewModel>
 
 <h2>Comments</h2>
@@ -11,6 +14,18 @@
         <div class="card mb-3">
             <div class="card-header">
                 Commented by: @comment.UserName | Commented on: @comment.CommentedOn
+                @if (User.Identity.IsAuthenticated && comment.UserId.ToString() == User.GetId())
+                {
+                    <form asp-controller="Comment" asp-action="Delete" asp-area="" method="post" onsubmit="return deleteComment('@comment.Id', '@ViewBag.WatchId');">
+                        <input type="hidden" name="commentId" value="@comment.Id" />
+                        <input type="hidden" name="watchId" value="@ViewBag.WatchId" />
+                        @if (await commentService.IsUserAuthorOfTheComment(comment.Id.ToString(), User.GetId()))
+                        {
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        }
+                        
+                    </form>
+                }
             </div>
             <div class="card-body">
                 @comment.Text
@@ -23,4 +38,24 @@ else
     <p>No comments available.</p>
 }
 
+<script>
+    function deleteComment(commentId, watchId) {
+        // Call the delete action
+        fetch(`/Comment/Delete?commentId=${commentId}&watchId=${watchId}`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+            }
+        }).then(response => {
+            if (response.ok) {
+                // Reload the current page
+                window.location.reload();
+            }
+        });
+
+        // Prevent the form from submitting and reloading the page
+        return false;
+    }
+</script>
 

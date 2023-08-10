@@ -50,5 +50,20 @@ namespace WatchHeaven.Web.Controllers
             return RedirectToAction("Details", "Watch", new { id = watchId });
         }
 
+        public async Task<IActionResult> Delete(string commentId, string watchId)
+        {
+            // Get the user ID
+            var userId = this.User.GetId();
+            if (await commentService.IsUserAuthorOfTheComment(commentId, userId))
+            {
+                await commentService.DeleteCommentAsync(commentId, userId);
+                TempData["Message"] = "Comment deleted successfully.";
+            }
+            else
+            {
+                TempData["Error"] = "You are not the owner of this comment.";
+            }
+            return Ok(); // the request is handed
+        }
     }
 }
