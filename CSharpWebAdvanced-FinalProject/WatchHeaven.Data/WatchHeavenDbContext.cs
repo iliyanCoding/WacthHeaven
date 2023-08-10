@@ -26,7 +26,7 @@ namespace WatchHeaven.Web.Data
 
         public DbSet<Watch> Watches { get; set; } = null!;
 
-        //public DbSet<UserFavoriteWatch> UserFavoriteWatches { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -60,5 +60,7 @@ namespace WatchHeaven.Data.Model
         public Seller Seller { get; set; } = null!;
 
         public ICollection<ApplicationUser> UsersWhoFavorited { get; set; } = new HashSet<ApplicationUser>();
+
+        public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
     }
 }

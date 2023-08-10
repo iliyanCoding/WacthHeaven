@@ -62,5 +62,11 @@ namespace WatchHeaven.Common
             public const int LastNameMinLength = 2;
             public const int LastNameMaxLength = 30;
         }
+
+        public static class Comment
+        {
+            public const int TextMaxLength = 300;
+            public const int TextMinLength = 1;
+        }
     }
 }

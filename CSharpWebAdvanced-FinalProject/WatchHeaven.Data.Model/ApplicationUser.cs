@@ -10,6 +10,7 @@ namespace WatchHeaven.Data.Model
         {
             this.Id = Guid.NewGuid();
             this.FavoriteWatches = new HashSet<Watch>();
+            this.Comments = new HashSet<Comment>();
         }
 
         [Required]
@@ -21,5 +22,7 @@ namespace WatchHeaven.Data.Model
         public string LastName { get; set; } = null!;
 
         public virtual ICollection<Watch> FavoriteWatches { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }
