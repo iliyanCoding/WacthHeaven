@@ -7,6 +7,7 @@ using WatchHeaven.Data.Model;
 using WatchHeaven.Services.Data;
 using WatchHeaven.Services.Data.Interfaces;
 using WatchHeaven.Web.Data;
+using WatchHeaven.Web.Hubs;
 using WatchHeaven.Web.Infrastructure.ModelBinders;
 using static WatchHeaven.Common.GeneralApplicationConstants;
 
@@ -58,6 +59,8 @@ namespace WatchHeaven.Web
                     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
                 });
 
+            builder.Services.AddSignalR();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -86,6 +89,7 @@ namespace WatchHeaven.Web
 
             app.UseEndpoints(config =>
             {
+                app.MapHub<ChatHub>("/chathub");
                 config.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
@@ -93,8 +97,9 @@ namespace WatchHeaven.Web
                 config.MapRazorPages();
             });
 
-            app.MapDefaultControllerRoute();
-            app.MapRazorPages();
+            //app.MapDefaultControllerRoute();
+            //app.MapRazorPages();
+            
 
             app.Run();
         }
