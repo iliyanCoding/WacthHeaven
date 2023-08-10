@@ -9,8 +9,6 @@ using static WatchHeaven.Common.NotificationMessageConstants;
 using static WatchHeaven.Common.GeneralApplicationConstants;
 using WatchHeaven.Web.Infrastructure.Extensions;
 using WatchHeaven.Services.Data.Interfaces;
-using WatchHeaven.Services.Data;
-
 namespace WatchHeaven.Web.Controllers
 {
     public class UserController : Controller

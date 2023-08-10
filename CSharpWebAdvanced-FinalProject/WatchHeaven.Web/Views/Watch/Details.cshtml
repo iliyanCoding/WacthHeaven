@@ -12,63 +12,68 @@
 
 @{
     ViewBag.Title = "Watch Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
-<div class="container" style="display:inline">
+<div class="container">
     <div class="row">
-        <div class="col-4">
-            <img class="card-img-top" style="width: 30rem;"
-                 src="@Model.ImageUrl" alt="Watch Image">
+        <div class="col-md-4">
+            <img class="card-img-top" style="width: 30rem;" src="@Model.ImageUrl" alt="Watch Image">
         </div>
-        <div class="card col-8 border-0">
-            <p style="font-size:25px;"><u>@Model.Brand</u></p>
-            <p style="font-size:20px;"><u>@Model.Model</u></p>
-            <p>
-                Price:
-                <b>@($"{Model.Price:f2}") BGN</b>
-            </p>
+        <div class="card col-md-8 border-0">
+            <p style="font-size: 25px;"><u>@Model.Brand</u></p>
+            <p style="font-size: 20px;"><u>@Model.Model</u></p>
+            <p>Price: <b>@($"{Model.Price:f2}") BGN</b></p>
             <p>@Model.Description</p>
             <p>Category: <b>@Model.Category</b></p>
             <p>Condition: <b>@Model.Condition</b></p>
-            <div class="form-inline">
+            <div class="form-inline mt-3">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
                     @if ((isUserSeller && isSellerOwnerOfTheWatch) || this.User.IsAdmin())
                     {
-                        <a class="btn btn-warning" asp-controller="Watch" asp-action="Edit" asp-area=" "
-                             asp-route-id="@Model.Id">Edit</a>
-                        <a class="ml-2 btn btn-danger" asp-controller="Watch" asp-action="Delete" asp-area=""
-                            asp-route-id="@Model.Id">Delete</a>
+                        <a class="btn btn-warning mr-2" asp-controller="Watch" asp-action="Edit" asp-area="" asp-route-id="@Model.Id">Edit</a>
+                        <a class="btn btn-danger" asp-controller="Watch" asp-action="Delete" asp-area="" asp-route-id="@Model.Id">Delete</a>
                     }
                     @if (!isWatchInFavorites)
                     {
-                        <form method="post" asp-controller="User" asp-action="AddToFavorites" asp-route-id="@Model.Id" asp-area="">
+                        <form class="ml-2" method="post" asp-controller="User" asp-action="AddToFavorites" asp-route-id="@Model.Id" asp-area="">
                             <button type="submit" class="btn btn-outline-danger">Add to Favorites</button>
                         </form>
                     }
                     else
                     {
-                        <form method="post" asp-controller="User" asp-action="RemoveFromFavorites" asp-route-id="@Model.Id" asp-area="">
+                        <form class="ml-2" method="post" asp-controller="User" asp-action="RemoveFromFavorites" asp-route-id="@Model.Id" asp-area="">
                             <button type="submit" class="btn btn-outline-danger">Remove from Favorites</button>
                         </form>
                     }
-
                 }
-                <a class="btn btn-primary" asp-controller="Watch" asp-action="Buy"
-                   asp-route-id="@Model.Id">Buy</a>
+                
+                <a class="btn btn-primary ml-2" asp-controller="Watch" asp-action="Buy" asp-route-id="@Model.Id">Buy</a>
+                <br>
+                <hr>
+                <a class="btn btn-outline-primary ml-2" asp-controller="Comment" asp-action="Comments" asp-route-watchId="@Model.Id">Go to Comments</a>
+                <form class="ml-2" asp-controller="Comment" asp-action="AddComment" method="post">
+                    <input type="hidden" name="watchId" value="@Model.Id" />
+                    <div class="form-group">
+                        <label for="commentText">Add a Comment:</label>
+                        <textarea class="form-control" id="commentText" name="commentText" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Leave a Comment</button>
+                </form>
             </div>
             <p></p>
-            <div class="card" style="width: 18rem;">
+            <div class="card mt-3" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Seller Info</h5>
                     <p class="card-text">Name: @Model.Seller.FullName</p>
-                    <p class="card-text">Email:  @Model.Seller.Email</p>
+                    <p class="card-text">Email: @Model.Seller.Email</p>
                     <p class="card-text">Phone Number: @Model.Seller.PhoneNumber</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

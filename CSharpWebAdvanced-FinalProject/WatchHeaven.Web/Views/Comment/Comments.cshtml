@@ -1,0 +1,26 @@
+﻿@using WatchHeaven.Web.ViewModels.Comment;
+@model IEnumerable<CommentViewModel>
+
+<h2>Comments</h2>
+<hr />
+
+@if (Model.Any())
+{
+    @foreach (var comment in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Commented by: @comment.UserName | Commented on: @comment.CommentedOn
+            </div>
+            <div class="card-body">
+                @comment.Text
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No comments available.</p>
+}
+
+

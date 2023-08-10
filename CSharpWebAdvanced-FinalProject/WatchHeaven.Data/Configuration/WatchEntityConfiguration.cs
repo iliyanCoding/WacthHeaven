@@ -39,7 +39,8 @@ namespace WatchHeaven.Data.Configuration
                 .HasForeignKey(w => w.SellerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasData(this.GenerateWatches());
+            builder.HasData(GenerateWatches());
+
         }
 
         private Watch[] GenerateWatches()

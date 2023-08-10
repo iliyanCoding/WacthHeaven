@@ -28,6 +28,7 @@ namespace WatchHeaven.Web.Data
 
         public DbSet<Comment> Comments { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
@@ -40,7 +41,6 @@ namespace WatchHeaven.Web.Data
             {
                 builder.ApplyConfiguration(new CategoryEntityConfiguration());
                 builder.ApplyConfiguration(new ConditionEntityConfiguration());
-                builder.ApplyConfiguration(new SeedWatchEntityConfiguration());
             }
 
             base.OnModelCreating(builder);
