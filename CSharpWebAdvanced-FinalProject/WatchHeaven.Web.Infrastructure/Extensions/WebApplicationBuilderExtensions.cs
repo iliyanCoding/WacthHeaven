@@ -46,18 +46,18 @@
 
             Task.Run(async () =>
             {
-                if (await roleManager.RoleExistsAsync(AdminRoleName))
+                if (!await roleManager.RoleExistsAsync(AdminRoleName))
                 {
-                    return;
+                    IdentityRole<Guid> role = new IdentityRole<Guid>(AdminRoleName);
+                    await roleManager.CreateAsync(role);
                 }
 
-                IdentityRole<Guid> role = new IdentityRole<Guid>(AdminRoleName);
+                ApplicationUser? adminUser = await userManager.FindByEmailAsync(email);
 
-                await roleManager.CreateAsync(role);
-
-                ApplicationUser adminUser = await userManager.FindByEmailAsync(email);
-
-                await userManager.AddToRoleAsync(adminUser, AdminRoleName);
+                if (adminUser != null && !await userManager.IsInRoleAsync(adminUser, AdminRoleName))
+                {
+                    await userManager.AddToRoleAsync(adminUser, AdminRoleName);
+                }
             })
             .GetAwaiter()
             .GetResult();

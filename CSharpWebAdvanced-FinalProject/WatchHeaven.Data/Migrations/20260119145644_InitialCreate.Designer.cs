@@ -12,8 +12,8 @@ using WatchHeaven.Web.Data;
 namespace WatchHeaven.Data.Migrations
 {
     [DbContext(typeof(WatchHeavenDbContext))]
-    [Migration("20230810032902_AddedCommentEntity")]
-    partial class AddedCommentEntity
+    [Migration("20260119145644_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -469,148 +469,6 @@ namespace WatchHeaven.Data.Migrations
                     b.HasIndex("SellerId");
 
                     b.ToTable("Watches");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("9251005b-7cc5-46ba-8d8c-763f4f56d185"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Brand = "Universal Geneve",
-                            CategoryId = 2,
-                            ConditionId = 3,
-                            Description = "This is an extremely rare and fine example of the Universal Genève Aero-Compax model in stainless steel from 1945. The watch measures 38mm in diameter and 14mm thick, which is a very large case for the period in which it was produced. By comparison, Patek Phillipe chronographs from the 1940s measured 33.3mm in diameter. These generous dimensions and the screw-in waterproof back give the watch a contemporary tool-watch feel with the charm of a 75-year-old timepiece. The incorporation of the Arabic numbers and luminous dial make this example all the more collectible.",
-                            ImageUrl = "https://www.lesrhabilleurs.com/wp-content/uploads/2020/03/universal-geneve-compax-nina-rindt-3-1920x980.jpg",
-                            IsActive = false,
-                            Model = "Aero-Compax",
-                            Price = 17500.00m,
-                            SellerId = new Guid("498a11db-2703-49db-bd42-cc4f3542ea9a")
-                        },
-                        new
-                        {
-                            Id = new Guid("282092ed-41f5-49b4-8911-a2cb4f0f6998"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Brand = "IWC Portuguese Chronograph",
-                            CategoryId = 1,
-                            ConditionId = 2,
-                            Description = "For Sale is the IWC Portuguese Chrono IW3714-15 Rose Gold 41MM Men's Watch. The watch comes with everything pictured. Purchased directly from a private collector, MINT condition. If you have any questions regarding condition please contact us, don't assume anything. Thank you",
-                            ImageUrl = "https://images.watchfinder.co.uk/imgv2/stock/175737/IWC-PortugueseChrono-IW371415-175737-1-210107-101106.jpg",
-                            IsActive = false,
-                            Model = "iw371415",
-                            Price = 9995.00m,
-                            SellerId = new Guid("498a11db-2703-49db-bd42-cc4f3542ea9a")
-                        },
-                        new
-                        {
-                            Id = new Guid("0b5fb749-2f0e-41c8-b3f4-ccd831edf1fe"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Brand = "Seiko",
-                            CategoryId = 3,
-                            ConditionId = 1,
-                            Description = "BNIB Seiko Prospex Marinemaster Diver Limited to 3,000 pieces\r\n\r\nRef.SLA047 - 44mm stainless steel case\r\n\r\nNever worn or sized - Stickered bracelet\r\n\r\nDouble boxed + Additional rubber strap + Instruction booklets + Open Warranty card\r\n\r\nFeel free to reach out with any questions. International buyers are responsible for import fees.",
-                            ImageUrl = "https://timeland.bg/media/catalog/product/cache/4de58d8aef055b2740ac5de0bb342903/s/r/srpj35k1.png",
-                            IsActive = false,
-                            Model = "Prospex",
-                            Price = 3200.00m,
-                            SellerId = new Guid("bc37c605-d12f-4a25-a0e9-57d2b75d5b97")
-                        },
-                        new
-                        {
-                            Id = new Guid("c8b96db7-3bfa-486b-900a-9d97404fc865"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Brand = "Breitling",
-                            CategoryId = 4,
-                            ConditionId = 2,
-                            Description = "Breitling Navitimer\r\n46mm Stainless Steel\r\nRotating Bezel, Steel Bracelet\r\nBlue Dial\r\nModel A2432212/C651\r\nMINT CONDITION!\r\n---Additional Blue Leather Strap with Deployment\r\nIncluded with the watch:\r\n-Breitling box\r\n-Breitling warranty papers dated April 2018\r\n-Manual\r\n-2 Year warranty\r\n-Appraisal",
-                            ImageUrl = "https://www.giulian.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/r/breitling-navitimer-world.jpg",
-                            IsActive = false,
-                            Model = "Navitimer World",
-                            Price = 5995.00m,
-                            SellerId = new Guid("bc37c605-d12f-4a25-a0e9-57d2b75d5b97")
-                        },
-                        new
-                        {
-                            Id = new Guid("e155b7ff-e2e5-4ad9-96fa-93945bd49c81"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Brand = "Zenith",
-                            CategoryId = 5,
-                            ConditionId = 4,
-                            Description = "Side notes:\r\nThe watch was serviced in March 2023.\r\nThe watch has some signs of use but is in very good condition and is fully composed of Zenith pieces as you can see on the pictures.\r\n\r\nSECURITY: All watches are deposited in a bank safe! Personal check and pickup are not possible. I only deliver by mailorder\r\n\r\n- Worldwide shipping, please ask for shipping rates!\r\n- All watches are 100% authentic\r\nThanks!",
-                            ImageUrl = "https://pics.zeitauktion.com/2021/2107187_sw6_cover_full.jpg",
-                            IsActive = false,
-                            Model = "Pilot",
-                            Price = 775.00m,
-                            SellerId = new Guid("498a11db-2703-49db-bd42-cc4f3542ea9a")
-                        },
-                        new
-                        {
-                            Id = new Guid("adfad0d6-afc6-4463-8f51-f711eada13c1"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Brand = "Universal Geneve",
-                            CategoryId = 2,
-                            ConditionId = 3,
-                            Description = "This is an extremely rare and fine example of the Universal Genève Aero-Compax model in stainless steel from 1945. The watch measures 38mm in diameter and 14mm thick, which is a very large case for the period in which it was produced. By comparison, Patek Phillipe chronographs from the 1940s measured 33.3mm in diameter. These generous dimensions and the screw-in waterproof back give the watch a contemporary tool-watch feel with the charm of a 75-year-old timepiece. The incorporation of the Arabic numbers and luminous dial make this example all the more collectible.",
-                            ImageUrl = "https://www.lesrhabilleurs.com/wp-content/uploads/2020/03/universal-geneve-compax-nina-rindt-3-1920x980.jpg",
-                            IsActive = false,
-                            Model = "Aero-Compax",
-                            Price = 17500.00m,
-                            SellerId = new Guid("498a11db-2703-49db-bd42-cc4f3542ea9a")
-                        },
-                        new
-                        {
-                            Id = new Guid("c1a8e2f0-088a-46b5-b266-94cb41d7a6e3"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Brand = "IWC Portuguese Chronograph",
-                            CategoryId = 1,
-                            ConditionId = 2,
-                            Description = "For Sale is the IWC Portuguese Chrono IW3714-15 Rose Gold 41MM Men's Watch. The watch comes with everything pictured. Purchased directly from a private collector, MINT condition. If you have any questions regarding condition please contact us, don't assume anything. Thank you",
-                            ImageUrl = "https://images.watchfinder.co.uk/imgv2/stock/175737/IWC-PortugueseChrono-IW371415-175737-1-210107-101106.jpg",
-                            IsActive = false,
-                            Model = "iw371415",
-                            Price = 9995.00m,
-                            SellerId = new Guid("498a11db-2703-49db-bd42-cc4f3542ea9a")
-                        },
-                        new
-                        {
-                            Id = new Guid("18ed964b-1286-4611-831a-1b0e81bfacf9"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Brand = "Seiko",
-                            CategoryId = 3,
-                            ConditionId = 1,
-                            Description = "BNIB Seiko Prospex Marinemaster Diver Limited to 3,000 pieces\r\n\r\nRef.SLA047 - 44mm stainless steel case\r\n\r\nNever worn or sized - Stickered bracelet\r\n\r\nDouble boxed + Additional rubber strap + Instruction booklets + Open Warranty card\r\n\r\nFeel free to reach out with any questions. International buyers are responsible for import fees.",
-                            ImageUrl = "https://timeland.bg/media/catalog/product/cache/4de58d8aef055b2740ac5de0bb342903/s/r/srpj35k1.png",
-                            IsActive = false,
-                            Model = "Prospex",
-                            Price = 3200.00m,
-                            SellerId = new Guid("bc37c605-d12f-4a25-a0e9-57d2b75d5b97")
-                        },
-                        new
-                        {
-                            Id = new Guid("66c67e6f-7049-4789-9949-3797328a3835"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Brand = "Breitling",
-                            CategoryId = 4,
-                            ConditionId = 2,
-                            Description = "Breitling Navitimer\r\n46mm Stainless Steel\r\nRotating Bezel, Steel Bracelet\r\nBlue Dial\r\nModel A2432212/C651\r\nMINT CONDITION!\r\n---Additional Blue Leather Strap with Deployment\r\nIncluded with the watch:\r\n-Breitling box\r\n-Breitling warranty papers dated April 2018\r\n-Manual\r\n-2 Year warranty\r\n-Appraisal",
-                            ImageUrl = "https://www.giulian.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/r/breitling-navitimer-world.jpg",
-                            IsActive = false,
-                            Model = "Navitimer World",
-                            Price = 5995.00m,
-                            SellerId = new Guid("bc37c605-d12f-4a25-a0e9-57d2b75d5b97")
-                        },
-                        new
-                        {
-                            Id = new Guid("dbcbe75a-d4c3-4beb-b59a-2d68504520ca"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Brand = "Zenith",
-                            CategoryId = 5,
-                            ConditionId = 4,
-                            Description = "Side notes:\r\nThe watch was serviced in March 2023.\r\nThe watch has some signs of use but is in very good condition and is fully composed of Zenith pieces as you can see on the pictures.\r\n\r\nSECURITY: All watches are deposited in a bank safe! Personal check and pickup are not possible. I only deliver by mailorder\r\n\r\n- Worldwide shipping, please ask for shipping rates!\r\n- All watches are 100% authentic\r\nThanks!",
-                            ImageUrl = "https://pics.zeitauktion.com/2021/2107187_sw6_cover_full.jpg",
-                            IsActive = false,
-                            Model = "Pilot",
-                            Price = 775.00m,
-                            SellerId = new Guid("498a11db-2703-49db-bd42-cc4f3542ea9a")
-                        });
                 });
 
             modelBuilder.Entity("ApplicationUserWatch", b =>
@@ -682,13 +540,13 @@ namespace WatchHeaven.Data.Migrations
             modelBuilder.Entity("WatchHeaven.Data.Model.Comment", b =>
                 {
                     b.HasOne("WatchHeaven.Data.Model.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WatchHeaven.Data.Model.Watch", "Watch")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("WatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -755,6 +613,11 @@ namespace WatchHeaven.Data.Migrations
                     b.Navigation("Seller");
                 });
 
+            modelBuilder.Entity("WatchHeaven.Data.Model.ApplicationUser", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
             modelBuilder.Entity("WatchHeaven.Data.Model.Category", b =>
                 {
                     b.Navigation("Watches");
@@ -768,6 +631,11 @@ namespace WatchHeaven.Data.Migrations
             modelBuilder.Entity("WatchHeaven.Data.Model.Seller", b =>
                 {
                     b.Navigation("OwnedWatches");
+                });
+
+            modelBuilder.Entity("WatchHeaven.Data.Model.Watch", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

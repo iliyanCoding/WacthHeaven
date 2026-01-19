@@ -1,81 +1,150 @@
-# WatchHeaven Web App Documentation
+# WatchHeaven
 
-Welcome to the WatchHeaven README! This document provides an overview of the WatchHeaven web application, where users can buy and sell watches. If you're new to WatchHeaven, this guide will help you get started and understand the core features of the platform.
-
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Getting Started](#getting-started)
-- [Features](#features)
-- [Usage](#usage)
-  - [Browsing Watches](#browsing-watches)
-  - [Listing a Watch](#listing-a-watch)
-  - [Managing Listings](#managing-listings)
-  - [Editing and Deleting Listings](#editing-and-deleting-listings)
-- [FAQs](#faqs)
-- [Contact](#contact)
-
-## Introduction
-
-WatchHeaven is a user-friendly web application designed for watch enthusiasts. It enables users to explore a diverse range of watches, list their own watches for sale, and effectively manage their listings. Whether you're looking to buy a new watch or find a new owner for one of your timepieces, WatchHub has you covered.
-
-## Getting Started
-
-1. **Access the Web App:**
-   Soon the app will be hosted on the cloud so you can access it from anywhere.
-
-2. **Sign Up or Log In:**
-   If you're new to WatchHeaven, create an account by clicking "Register" If you already have an account, log in using your credentials.
+A modern ASP.NET Core MVC web application for buying and selling luxury watches. WatchHeaven provides a platform for watch enthusiasts to browse, list, and manage watch listings with a clean, user-friendly interface.
 
 ## Features
 
-- **Browse Watches:** Discover watches from various categories, brands, and conditions.
+- **User Authentication** - Secure registration and login powered by ASP.NET Core Identity
+- **Watch Marketplace** - Browse watches by category, condition, brand, and price
+- **Advanced Search & Filtering** - Find watches using multiple filter criteria and sorting options
+- **Seller Dashboard** - Manage your listings, track active watches, and monitor sales
+- **Favorites System** - Save watches to your favorites for quick access
+- **Comments & Reviews** - Leave comments on watch listings
+- **Admin Panel** - Administrative tools for managing users, listings, and site content
+- **Real-time Updates** - SignalR integration for live notifications
+- **Responsive Design** - Mobile-friendly Bootstrap UI
 
-- **List Watches:** Sellers can easily create listings by providing watch details and images.
+## Tech Stack
 
-- **Dashboard:** Access your personal dashboard to view active listings.
+- **Framework:** ASP.NET Core 6.0 MVC
+- **Database:** Microsoft SQL Server with Entity Framework Core 6.0
+- **Authentication:** ASP.NET Core Identity
+- **Real-time:** SignalR
+- **Frontend:** Bootstrap 5, jQuery
+- **Security:** Google reCAPTCHA integration
+
+## Project Structure
+
+```
+WatchHeaven/
+├── WatchHeaven.Web/                 # Main web application
+│   ├── Controllers/                 # MVC Controllers
+│   ├── Views/                       # Razor Views
+│   ├── Areas/Admin/                 # Admin area
+│   └── Hubs/                        # SignalR Hubs
+├── WatchHeaven.Data/                # Data access layer
+│   ├── Configuration/               # Entity configurations
+│   └── Migrations/                  # EF Core migrations
+├── WatchHeaven.Data.Model/          # Domain models
+├── WatchHeaven.Services.Data/       # Business logic services
+├── WatchHeaven.Services.Data.Models/# Service DTOs
+├── WatchHeaven.Web.ViewModels/      # View models
+├── WatchHeaven.Web.Infrastructure/  # Extensions and utilities
+├── WatchHeaven.WebApi/              # REST API endpoints
+└── WatchHeaven.Services.Tests/      # Unit tests
+```
+
+## Prerequisites
+
+- [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) or later
+- [SQL Server](https://www.microsoft.com/sql-server) (LocalDB, Express, or full edition)
+- [Docker](https://www.docker.com/) (optional, for containerized SQL Server)
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/WatchHeaven.git
+cd WatchHeaven/CSharpWebAdvanced-FinalProject
+```
+
+### 2. Configure the Database
+
+Update the connection string in `WatchHeaven.Web/appsettings.json`:
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost,1433;Database=WatchHeaven;User Id=sa;Password=YourPassword;TrustServerCertificate=True"
+  }
+}
+```
+
+**Using Docker for SQL Server:**
+
+```bash
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=YourPassword123!" \
+  -p 1433:1433 --name sqlserver \
+  -d mcr.microsoft.com/mssql/server:2022-latest
+```
+
+### 3. Apply Database Migrations
+
+```bash
+cd WatchHeaven.Web
+dotnet ef database update
+```
+
+### 4. Run the Application
+
+```bash
+dotnet run --urls="http://localhost:5007"
+```
+
+The application will be available at `http://localhost:5007`
 
 ## Usage
 
-### Browsing Watches
+### For Buyers
+1. Register an account or log in
+2. Browse watches using categories and filters
+3. View watch details and seller information
+4. Add watches to your favorites
+5. Leave comments on listings
 
-1. Browse the available watch categories to find watches that interest you.
+### For Sellers
+1. Register and become a seller through the dashboard
+2. Create watch listings with details and images
+3. Manage your active listings
+4. Edit or remove listings as needed
 
-2. Utilize the search bar to search for specific watch brands, models, or conditions.
+### For Administrators
+1. Access the admin panel at `/Admin`
+2. Manage user accounts and roles
+3. Moderate listings and comments
+4. View site statistics
 
-3. Click on a watch to view detailed information, including images and specifications.
+## Watch Categories
 
-### Listing a Watch
+- Chronograph
+- Vintage
+- Diving
+- Pilot's
+- Military
+- Dress
+- Smart
+- Sport
 
-1. Click "Add a Watch For Sale" in the navigation menu to create a new listing. Be sure to become a Seller first.
+## Running Tests
 
-2. Fill in the watch details, upload high-quality image, specify the brand, model, condition, and asking price.
+```bash
+cd WatchHeaven.Services.Tests
+dotnet test
+```
 
-3. Submit the listing, making your watch visible to potential buyers.
+## Contributing
 
-### Managing Listings
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/new-feature`)
+5. Open a Pull Request
 
-1. Access your dashboard to see all your active listings and their current status.
+## License
 
-2. Keep track of watches.
-
-### Editing and Deleting Listings
-
-1. To edit a listing, navigate to your dashboard, locate the listing, and click "Edit." Save your changes.
-
-2. To remove a listing, click "Delete".
-
-## FAQs
-
-**Q: Are there listing fees?**
-A: No, there are absolutely no fees.
-
-**Q: How can I negotiate the price with a seller?**
-A: Unfortunately you can't negotiate with the seller, so if you decided to buy the watch you will have to pay the price on the listing.
-
-**Q: Can I list watches from different brands?**
-A: Absolutely! WatchHeaven welcomes listings from a wide range of brands and models.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-If you have any questions, concerns, or feedback, please reach out to our support team @iliyan.programirane@gmail.com. We're here to assist you on your watch-buying and selling journey!
+For questions or feedback, please reach out at iliyan.programirane@gmail.com

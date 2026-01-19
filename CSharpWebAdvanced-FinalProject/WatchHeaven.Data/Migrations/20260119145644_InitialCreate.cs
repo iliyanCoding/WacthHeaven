@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WatchHeaven.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,8 @@ namespace WatchHeaven.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false, defaultValue: "FirstNameTest"),
+                    LastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false, defaultValue: "LastNameTest"),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -207,22 +209,18 @@ namespace WatchHeaven.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Brand = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Model = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AddedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     ConditionId = table.Column<int>(type: "int", nullable: false),
-                    SellerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    SellerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Watches", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Watches_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Watches_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -234,7 +232,7 @@ namespace WatchHeaven.Data.Migrations
                         column: x => x.ConditionId,
                         principalTable: "Conditions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Watches_Sellers_SellerId",
                         column: x => x.SellerId,
@@ -244,7 +242,35 @@ namespace WatchHeaven.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FavouriteWatches",
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    WatchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    CommentedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comments_Watches_WatchId",
+                        column: x => x.WatchId,
+                        principalTable: "Watches",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserFavoriteWatch",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -252,19 +278,66 @@ namespace WatchHeaven.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FavouriteWatches", x => new { x.UserId, x.WatchId });
+                    table.PrimaryKey("PK_UserFavoriteWatch", x => new { x.UserId, x.WatchId });
                     table.ForeignKey(
-                        name: "FK_FavouriteWatches_AspNetUsers_UserId",
+                        name: "FK_UserFavoriteWatch_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FavouriteWatches_Watches_WatchId",
+                        name: "FK_UserFavoriteWatch_Watches_WatchId",
                         column: x => x.WatchId,
                         principalTable: "Watches",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserFavoriteWatches",
+                columns: table => new
+                {
+                    FavoriteWatchesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UsersWhoFavoritedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserFavoriteWatches", x => new { x.FavoriteWatchesId, x.UsersWhoFavoritedId });
+                    table.ForeignKey(
+                        name: "FK_UserFavoriteWatches_AspNetUsers_UsersWhoFavoritedId",
+                        column: x => x.UsersWhoFavoritedId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserFavoriteWatches_Watches_FavoriteWatchesId",
+                        column: x => x.FavoriteWatchesId,
+                        principalTable: "Watches",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Chronograph" },
+                    { 2, "Vintage" },
+                    { 3, "Diving" },
+                    { 4, "Pilot's" },
+                    { 5, "Military" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Conditions",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "New" },
+                    { 2, "Very good" },
+                    { 3, "Good" },
+                    { 4, "Fair" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -307,8 +380,13 @@ namespace WatchHeaven.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FavouriteWatches_WatchId",
-                table: "FavouriteWatches",
+                name: "IX_Comments_UserId",
+                table: "Comments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_WatchId",
+                table: "Comments",
                 column: "WatchId");
 
             migrationBuilder.CreateIndex(
@@ -317,9 +395,14 @@ namespace WatchHeaven.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Watches_ApplicationUserId",
-                table: "Watches",
-                column: "ApplicationUserId");
+                name: "IX_UserFavoriteWatch_WatchId",
+                table: "UserFavoriteWatch",
+                column: "WatchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserFavoriteWatches_UsersWhoFavoritedId",
+                table: "UserFavoriteWatches",
+                column: "UsersWhoFavoritedId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Watches_CategoryId",
@@ -355,7 +438,13 @@ namespace WatchHeaven.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "FavouriteWatches");
+                name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "UserFavoriteWatch");
+
+            migrationBuilder.DropTable(
+                name: "UserFavoriteWatches");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -39,7 +39,8 @@ namespace WatchHeaven.Data.Configuration
                 .HasForeignKey(w => w.SellerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasData(GenerateWatches());
+            // Seed data disabled - Sellers must be created first via user registration
+            // builder.HasData(GenerateWatches());
 
         }
 
